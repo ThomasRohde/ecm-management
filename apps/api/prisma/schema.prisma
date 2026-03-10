@@ -1,0 +1,475 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ──────────────────────────────────────────────────────────────────────
+
+enum CapabilityType {
+  ABSTRACT
+  LEAF
+}
+
+enum LifecycleStatus {
+  DRAFT
+  ACTIVE
+  DEPRECATED
+  RETIRED
+}
+
+enum ModelVersionState {
+  DRAFT
+  PUBLISHED
+  ROLLED_BACK
+}
+
+enum BranchType {
+  MAIN
+  WHAT_IF
+}
+
+enum ChangeRequestStatus {
+  DRAFT
+  SUBMITTED
+  PENDING_APPROVAL
+  APPROVED
+  EXECUTING
+  COMPLETED
+  REJECTED
+  CANCELLED
+}
+
+enum ApprovalDecisionOutcome {
+  APPROVED
+  REJECTED
+}
+
+enum ChangeRequestType {
+  CREATE
+  UPDATE
+  DELETE
+  REPARENT
+  PROMOTE
+  DEMOTE
+  MERGE
+  RETIRE
+}
+
+enum MappingState {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
+enum DeliveryStatus {
+  PENDING
+  DELIVERED
+  FAILED
+  RETRYING
+}
+
+enum HealthStatus {
+  HEALTHY
+  DEGRADED
+  UNHEALTHY
+}
+
+enum CapabilityVersionChangeType {
+  CREATE
+  UPDATE
+  RENAME
+  REPARENT
+  PROMOTE
+  DEMOTE
+  MERGE
+  RETIRE
+  DELETE
+}
+
+// ─── Phase 9: Auth / RBAC ───────────────────────────────────────────────────────
+
+/// Roles mirror the permission matrix defined in PLAN.md § Phase 9A.
+enum UserRole {
+  VIEWER
+  CONTRIBUTOR
+  STEWARD
+  CURATOR
+  GOVERNANCE_APPROVER
+  INTEGRATION_ENGINEER
+  ADMIN
+}
+
+// ─── Phase 9: Audit Trail ───────────────────────────────────────────────────────
+
+/// Discriminator for the entity being audited in a generic AuditEntry row.
+enum AuditEntityType {
+  CAPABILITY
+  CHANGE_REQUEST
+  MODEL_VERSION
+  MAPPING
+  DOWNSTREAM_CONSUMER
+  USER
+  AUTH_EVENT
+}
+
+/// Verb describing what happened in a generic AuditEntry row.
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  PUBLISH
+  ROLLBACK
+  SUBMIT
+  APPROVE
+  REJECT
+  CANCEL
+  LOCK
+  UNLOCK
+  LOGIN
+  LOGOUT
+  PERMISSION_CHANGE
+}
+
+// ─── Phase 9: Notifications & Tasks ────────────────────────────────────────────
+
+/// Notification trigger events – drives the notification-generation logic in Phase 9B.
+enum NotificationEventType {
+  CHANGE_REQUEST_SUBMITTED
+  CHANGE_REQUEST_APPROVED
+  CHANGE_REQUEST_REJECTED
+  METADATA_CHANGED
+  MODEL_PUBLISHED
+  MODEL_ROLLED_BACK
+  TASK_ASSIGNED
+}
+
+/// Lifecycle state of a TaskOrNotification record.
+enum NotificationStatus {
+  UNREAD
+  READ
+  DISMISSED
+}
+
+// ─── Core Domain ────────────────────────────────────────────────────────────────
+
+model Capability {
+  id                String            @id @default(uuid()) @db.Uuid
+  uniqueName        String            @unique @map("unique_name")
+  aliases           String[]          @default([])
+  description       String?
+  domain            String?
+  type              CapabilityType    @default(ABSTRACT)
+  parentId          String?           @db.Uuid @map("parent_id")
+  lifecycleStatus   LifecycleStatus   @default(DRAFT) @map("lifecycle_status")
+  effectiveFrom     DateTime?         @map("effective_from")
+  effectiveTo       DateTime?         @map("effective_to")
+  rationale         String?
+  sourceReferences  String[]          @default([]) @map("source_references")
+  tags              String[]          @default([])
+  stewardId         String?           @map("steward_id")
+  stewardDepartment String?           @map("steward_department")
+  nameGuardrailOverride          Boolean @default(false) @map("name_guardrail_override")
+  nameGuardrailOverrideRationale String? @map("name_guardrail_override_rationale")
+  isErroneous       Boolean           @default(false) @map("is_erroneous")
+  erroneousReason   String?           @map("erroneous_reason")
+  /// Non-null only for capabilities created inside a what-if branch.
+  /// Main capabilities always have this field as NULL.
+  /// Used by all main-facing reads to filter out branch-local capabilities
+  /// (WHERE branch_origin_id IS NULL) and prevent cross-branch leakage.
+  branchOriginId    String?           @db.Uuid @map("branch_origin_id")
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+
+  parent            Capability?       @relation("CapabilityTree", fields: [parentId], references: [id])
+  children          Capability[]      @relation("CapabilityTree")
+  versions          CapabilityVersion[]
+  mappings          Mapping[]
+  capabilityLocks   CapabilityLock[]
+  branchOrigin      ModelVersion?     @relation("BranchLocalCapabilities", fields: [branchOriginId], references: [id])
+
+  @@map("capability")
+  @@index([parentId])
+  @@index([lifecycleStatus])
+  @@index([domain])
+  @@index([branchOriginId])
+  @@index([branchOriginId, uniqueName])
+  @@index([parentId, branchOriginId, uniqueName])
+}
+
+// ─── Versioning ─────────────────────────────────────────────────────────────────
+
+model CapabilityVersion {
+  id                String                     @id @default(uuid()) @db.Uuid
+  capabilityId      String                     @db.Uuid
+  modelVersionId    String                     @db.Uuid
+  changeType        CapabilityVersionChangeType
+  /// JSON blob carrying the field-level delta: { before: {...}, after: {...} }
+  changedFields     Json
+  /// Snapshot of the full capability record *before* this change (null for CREATE)
+  beforeSnapshot    Json?                      @map("before_snapshot")
+  /// Snapshot of the full capability record *after* this change (null for DELETE)
+  afterSnapshot     Json?                      @map("after_snapshot")
+  changedBy         String
+  changedAt         DateTime                   @default(now())
+  /// Link to the immediately preceding CapabilityVersion entry for this capability,
+  /// forming a singly-linked history chain ordered by changedAt.
+  /// NOTE: The DB enforces chain linearity (one successor per node, via unique index
+  /// on previous_version_id WHERE NOT NULL) but cannot enforce that the linked
+  /// predecessor belongs to the same capabilityId — that invariant must be
+  /// validated by the CapabilityVersionService before each INSERT.
+  previousVersionId String?                    @db.Uuid @map("previous_version_id")
+
+  capability        Capability                 @relation(fields: [capabilityId], references: [id])
+  modelVersion      ModelVersion               @relation(fields: [modelVersionId], references: [id])
+  previousVersion   CapabilityVersion?         @relation("CapabilityVersionChain", fields: [previousVersionId], references: [id])
+  nextVersions      CapabilityVersion[]        @relation("CapabilityVersionChain")
+
+  @@index([capabilityId])
+  @@index([modelVersionId])
+  @@index([previousVersionId])
+}
+
+model ModelVersion {
+  id                   String            @id @default(uuid()) @db.Uuid
+  versionLabel         String            @unique
+  state                ModelVersionState @default(DRAFT)
+  baseVersionId        String?           @db.Uuid
+  branchType           BranchType        @default(MAIN)
+  /// Human-readable identifier for a what-if branch (null on MAIN branch versions)
+  branchName           String?           @map("branch_name")
+  /// Optional label / release description for snapshot versions
+  description          String?
+  /// Rationale note captured at publish or rollback time
+  notes                String?
+  createdBy            String
+  approvedBy           String?
+  publishedAt          DateTime?
+  rollbackOfVersionId  String?           @db.Uuid
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt @map("updated_at")
+
+  baseVersion          ModelVersion?     @relation("VersionLineage", fields: [baseVersionId], references: [id])
+  derivedVersions      ModelVersion[]    @relation("VersionLineage")
+  rollbackOf           ModelVersion?     @relation("VersionRollback", fields: [rollbackOfVersionId], references: [id])
+  rolledBackBy         ModelVersion[]    @relation("VersionRollback")
+  capabilityVersions   CapabilityVersion[]
+  publishEvents        PublishEvent[]
+  branchLocalCapabilities Capability[]  @relation("BranchLocalCapabilities")
+
+  /// Composite index to efficiently query "current DRAFT" or "current PUBLISHED" on any branch
+  @@index([branchType, state])
+}
+
+// ─── Change Requests ────────────────────────────────────────────────────────────
+
+model ChangeRequest {
+  id                    String              @id @default(uuid()) @db.Uuid
+  type                  ChangeRequestType
+  status                ChangeRequestStatus @default(DRAFT)
+  requestedBy           String
+  rationale             String?
+  approvals             Json?               // kept for legacy compat – superseded by ApprovalDecision rows
+  affectedCapabilityIds String[]            @db.Uuid
+  operationPayload      Json?               @map("operation_payload") // structured per-operation parameters
+  impactSummary         String?
+  downstreamPlan        String?
+  executionLog          Json?               // kept for legacy compat – superseded by ChangeRequestAuditEntry rows
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+
+  approvalDecisions     ApprovalDecision[]
+  auditEntries          ChangeRequestAuditEntry[]
+  capabilityLocks       CapabilityLock[]
+
+  @@index([status])
+  @@index([requestedBy])
+}
+
+// Structured approval record replacing the JSON approvals blob
+model ApprovalDecision {
+  id               String                   @id @default(uuid()) @db.Uuid
+  changeRequestId  String                   @db.Uuid @map("change_request_id")
+  approverRole     String                   @map("approver_role")
+  approverId       String                   @map("approver_id")
+  decision         ApprovalDecisionOutcome
+  comment          String?
+  decidedAt        DateTime                 @default(now()) @map("decided_at")
+
+  changeRequest    ChangeRequest            @relation(fields: [changeRequestId], references: [id])
+
+  // One decision per approver role per change request — backed by DB constraint
+  // "approval_decision_change_request_id_approver_role_key".
+  @@unique([changeRequestId, approverRole])
+  @@index([changeRequestId])
+  @@map("approval_decision")
+}
+
+// Immutable audit trail – no updatedAt, never mutated after insert
+model ChangeRequestAuditEntry {
+  id               String               @id @default(uuid()) @db.Uuid
+  changeRequestId  String               @db.Uuid @map("change_request_id")
+  actorId          String               @map("actor_id")
+  eventType        String               @map("event_type")
+  fromStatus       ChangeRequestStatus? @map("from_status")
+  toStatus         ChangeRequestStatus? @map("to_status")
+  comment          String?
+  metadata         Json?
+  createdAt        DateTime             @default(now()) @map("created_at")
+
+  changeRequest    ChangeRequest        @relation(fields: [changeRequestId], references: [id])
+
+  @@index([changeRequestId])
+  @@map("change_request_audit_entry")
+}
+
+// One lock row per capability; unique constraint prevents double-locking
+model CapabilityLock {
+  id               String        @id @default(uuid()) @db.Uuid
+  capabilityId     String        @db.Uuid @map("capability_id")
+  changeRequestId  String        @db.Uuid @map("change_request_id")
+  lockedAt         DateTime      @default(now()) @map("locked_at")
+  lockedBy         String        @map("locked_by")
+
+  capability       Capability    @relation(fields: [capabilityId], references: [id])
+  changeRequest    ChangeRequest @relation(fields: [changeRequestId], references: [id])
+
+  @@unique([capabilityId])
+  @@index([changeRequestId])
+  @@map("capability_lock")
+}
+
+// ─── Mappings & Integration ─────────────────────────────────────────────────────
+
+model Mapping {
+  id           String       @id @default(uuid()) @db.Uuid
+  mappingType  String
+  systemId     String
+  capabilityId String       @db.Uuid
+  state        MappingState @default(ACTIVE)
+  attributes   Json?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  capability   Capability   @relation(fields: [capabilityId], references: [id])
+
+  @@index([capabilityId])
+  @@index([systemId])
+  @@index([capabilityId, systemId])
+}
+
+model DownstreamConsumer {
+  id                    String       @id @default(uuid()) @db.Uuid
+  name                  String       @unique
+  contractType          String
+  syncMode              String
+  transformationProfile String?
+  healthStatus          HealthStatus @default(HEALTHY)
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
+}
+
+model PublishEvent {
+  id              String         @id @default(uuid()) @db.Uuid
+  eventType       String
+  modelVersionId  String         @db.Uuid
+  entityId        String         @db.Uuid
+  payloadRef      String?
+  publishedAt     DateTime       @default(now())
+  deliveryStatus  DeliveryStatus @default(PENDING)
+  attemptCount    Int            @default(0) @map("attempt_count")
+  maxAttempts     Int            @default(5) @map("max_attempts")
+  lastAttemptAt   DateTime?      @map("last_attempt_at")
+  nextAttemptAt   DateTime?      @default(now()) @map("next_attempt_at")
+  deliveredAt     DateTime?      @map("delivered_at")
+  lastError       String?        @map("last_error")
+  leaseOwner      String?        @map("lease_owner")
+  leaseExpiresAt  DateTime?      @map("lease_expires_at")
+
+  modelVersion    ModelVersion   @relation(fields: [modelVersionId], references: [id])
+
+  @@index([modelVersionId])
+  @@index([entityId])
+  @@index([deliveryStatus, nextAttemptAt])
+  @@index([deliveryStatus, leaseExpiresAt])
+}
+
+// ─── Phase 9A: Identity ─────────────────────────────────────────────────────────
+
+/// Local-auth user record. passwordHash stores bcrypt output; never returned to clients.
+/// stewardId / requestedBy / actorId columns in other models remain plain strings for
+/// now — the Phase 9A auth-module todo will add FK enforcement once the login flow is live.
+model User {
+  id            String     @id @default(uuid()) @db.Uuid
+  email         String     @unique
+  displayName   String     @map("display_name")
+  passwordHash  String     @map("password_hash")
+  role          UserRole   @default(VIEWER)
+  isActive      Boolean    @default(true) @map("is_active")
+  createdAt     DateTime   @default(now()) @map("created_at")
+  updatedAt     DateTime   @updatedAt @map("updated_at")
+
+  notifications TaskOrNotification[]
+
+  @@map("user")
+  @@index([role])
+}
+
+// ─── Phase 9B: Generic Audit Trail ─────────────────────────────────────────────
+
+/// Immutable, entity-agnostic audit record.  No updatedAt — rows are never mutated.
+/// before / after carry JSON snapshots of the record state around the action.
+/// metadata holds arbitrary context (e.g. IP address, session id, reason text).
+model AuditEntry {
+  id          String          @id @default(uuid()) @db.Uuid
+  entityType  AuditEntityType @map("entity_type")
+  /// UUID of the affected record (no FK – entity may span multiple tables).
+  entityId    String          @map("entity_id")
+  action      AuditAction
+  /// Opaque actor reference; may be a User.id, service account name, or "system".
+  actorId     String          @map("actor_id")
+  before      Json?
+  after       Json?
+  metadata    Json?
+  timestamp   DateTime        @default(now())
+
+  @@map("audit_entry")
+  @@index([entityType, entityId])
+  @@index([entityType, entityId, timestamp])
+  @@index([actorId])
+  @@index([timestamp])
+}
+
+// ─── Phase 9B: Notifications & Tasks ───────────────────────────────────────────
+
+/// Unified notification + task record per PRD § 12.
+/// recipientId is a hard FK to User; the entity fields are soft references
+/// so notifications can survive entity deletion.
+model TaskOrNotification {
+  id          String                @id @default(uuid()) @db.Uuid
+  eventType   NotificationEventType @map("event_type")
+  recipientId String                @db.Uuid @map("recipient_id")
+  /// Optional: which domain entity this notification is about.
+  entityType  AuditEntityType?      @map("entity_type")
+  /// Optional: the id of the related entity (soft reference, no FK).
+  entityId    String?               @map("entity_id")
+  status      NotificationStatus    @default(UNREAD)
+  title       String
+  body        String?
+  /// Arbitrary payload for the notification-rendering layer (e.g. deep-link info).
+  metadata    Json?
+  createdAt   DateTime              @default(now()) @map("created_at")
+  readAt      DateTime?             @map("read_at")
+
+  recipient   User                  @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@map("task_or_notification")
+  @@index([recipientId, status])
+  @@index([recipientId, status, createdAt])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+

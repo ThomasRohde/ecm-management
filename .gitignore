@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Test coverage
+coverage/
+
+# Prisma
+.prisma/
+*.db
+*.db-journal
+
+# Turbo
+.turbo/
+
+# Next.js
+.next/
+
+# Vite
+.vite/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+playwright-report/
+blob-report/
+test-results/
+
+# Docker
+docker-compose.override.yml
+
+# Local automation artifacts
+.playwright-cli/
+.copilot/

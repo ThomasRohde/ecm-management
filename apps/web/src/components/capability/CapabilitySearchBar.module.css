@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-3xs);
+  flex: 1 1 18rem;
+  min-width: min(18rem, 100%);
+  width: min(100%, 28rem);
+}
+
+.input {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}

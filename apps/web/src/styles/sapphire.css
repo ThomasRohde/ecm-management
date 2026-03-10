@@ -1,0 +1,958 @@
+/* Sapphire Design System - Lightweight CSS Approximation */
+/* Based on Danske Bank's Sapphire design tokens and component patterns */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== DESIGN TOKENS ===== */
+
+.sapphire-theme-default,
+.sapphire-theme--secondary,
+.sapphire-theme--tertiary,
+.sapphire-theme--contrast {
+  /* ===== BREAKPOINTS ===== */
+  --sapphire-semantic-size-breakpoint-xl: 1400px;
+  --sapphire-semantic-size-breakpoint-lg: 1200px;
+  --sapphire-semantic-size-breakpoint-md: 960px;
+  --sapphire-semantic-size-breakpoint-sm: 768px;
+  --sapphire-semantic-size-breakpoint-xs: 576px;
+
+  /* ===== FONT WEIGHTS ===== */
+  --sapphire-semantic-font-weight-default-bold: 600;
+  --sapphire-semantic-font-weight-default-medium: 500;
+  --sapphire-semantic-font-weight-default-regular: 400;
+  --sapphire-semantic-font-weight-default-light: 300;
+
+  /* ===== TRANSITIONS ===== */
+  --sapphire-global-transitions-ease-in: cubic-bezier(0, 0, 0, 1);
+  --sapphire-global-transitions-ease-in-out-quick: cubic-bezier(0.5, 0, 0, 1);
+  --sapphire-global-transitions-ease-in-out: cubic-bezier(0.7, 0, 0.2, 1);
+  --sapphire-semantic-transitions-fade: var(--sapphire-global-transitions-ease-in);
+  --sapphire-semantic-transitions-dynamic: var(--sapphire-global-transitions-ease-in-out-quick);
+  --sapphire-semantic-transitions-standard: var(--sapphire-global-transitions-ease-in-out);
+
+  /* ===== TIMING ===== */
+  --sapphire-global-time-2000: 2.00s;
+  --sapphire-global-time-1800: 1.80s;
+  --sapphire-global-time-1000: 1.00s;
+  --sapphire-global-time-400: 0.40s;
+  --sapphire-global-time-200: 0.20s;
+  --sapphire-global-time-100: 0.10s;
+  --sapphire-semantic-time-motion-quick: var(--sapphire-global-time-100);
+  --sapphire-semantic-time-motion-default: var(--sapphire-global-time-200);
+  --sapphire-semantic-time-motion-slow: var(--sapphire-global-time-400);
+  --sapphire-semantic-time-motion-very-slow: var(--sapphire-global-time-1000);
+  --sapphire-semantic-time-fade-slow: var(--sapphire-global-time-1800);
+  --sapphire-semantic-time-fade-quick: var(--sapphire-global-time-100);
+  --sapphire-semantic-time-fade-default: var(--sapphire-global-time-200);
+
+  /* ===== LINE HEIGHTS ===== */
+  --sapphire-global-size-line-height-md: 1.5;
+  --sapphire-global-size-line-height-sm: 1.3;
+  --sapphire-semantic-size-line-height-md: var(--sapphire-global-size-line-height-md);
+  --sapphire-semantic-size-line-height-sm: var(--sapphire-global-size-line-height-sm);
+
+  /* ===== FONT SIZES ===== */
+  --sapphire-global-size-font-300: 3rem;
+  --sapphire-global-size-font-250: 2.5rem;
+  --sapphire-global-size-font-200: 2rem;
+  --sapphire-global-size-font-175: 1.75rem;
+  --sapphire-global-size-font-163: 1.625rem;
+  --sapphire-global-size-font-150: 1.5rem;
+  --sapphire-global-size-font-125: 1.25rem;
+  --sapphire-global-size-font-112: 1.125rem;
+  --sapphire-global-size-font-100: 1rem;
+  --sapphire-global-size-font-88: 0.875rem;
+  --sapphire-global-size-font-75: 0.75rem;
+  --sapphire-global-size-font-60: 0.625rem;
+
+  /* Semantic font sizes (mobile-first, overridden at 960px) */
+  --sapphire-semantic-size-font-heading-2xl: var(--sapphire-global-size-font-175);
+  --sapphire-semantic-size-font-heading-xl: var(--sapphire-global-size-font-150);
+  --sapphire-semantic-size-font-heading-lg: var(--sapphire-global-size-font-125);
+  --sapphire-semantic-size-font-heading-md: var(--sapphire-global-size-font-125);
+  --sapphire-semantic-size-font-heading-sm: var(--sapphire-global-size-font-100);
+  --sapphire-semantic-size-font-heading-xs: var(--sapphire-global-size-font-100);
+  --sapphire-semantic-size-font-body-lg: var(--sapphire-global-size-font-112);
+  --sapphire-semantic-size-font-body-md: var(--sapphire-global-size-font-100);
+  --sapphire-semantic-size-font-body-sm: var(--sapphire-global-size-font-88);
+  --sapphire-semantic-size-font-body-xs: var(--sapphire-global-size-font-75);
+  --sapphire-semantic-size-font-control-lg: var(--sapphire-semantic-size-font-body-md);
+  --sapphire-semantic-size-font-control-md: var(--sapphire-semantic-size-font-body-sm);
+  --sapphire-semantic-size-font-control-sm: var(--sapphire-semantic-size-font-body-xs);
+  --sapphire-semantic-size-font-label-md: var(--sapphire-semantic-size-font-body-sm);
+  --sapphire-semantic-size-font-label-sm: var(--sapphire-semantic-size-font-body-xs);
+  --sapphire-semantic-font-name-default: 'Danske', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* ===== GENERIC SIZES ===== */
+  --sapphire-global-size-generic-200: 5rem;
+  --sapphire-global-size-generic-180: 4.5rem;
+  --sapphire-global-size-generic-160: 4rem;
+  --sapphire-global-size-generic-140: 3.5rem;
+  --sapphire-global-size-generic-120: 3rem;
+  --sapphire-global-size-generic-110: 2.75rem;
+  --sapphire-global-size-generic-100: 2.5rem;
+  --sapphire-global-size-generic-80: 2rem;
+  --sapphire-global-size-generic-60: 1.5rem;
+  --sapphire-global-size-generic-50: 1.25rem;
+  --sapphire-global-size-generic-40: 1rem;
+  --sapphire-global-size-generic-35: 0.875rem;
+  --sapphire-global-size-generic-30: 0.75rem;
+  --sapphire-global-size-generic-25: 0.625rem;
+  --sapphire-global-size-generic-20: 0.5rem;
+  --sapphire-global-size-generic-15: 0.375rem;
+  --sapphire-global-size-generic-10: 0.25rem;
+  --sapphire-global-size-generic-5: 0.125rem;
+  --sapphire-global-size-generic-2: 0.0625rem;
+  --sapphire-global-size-generic-0: 0rem;
+  --sapphire-global-size-generic-240: 6rem;
+  --sapphire-global-size-generic-750: 18.75rem;
+
+  /* Static sizes */
+  --sapphire-global-size-static-60: 24px;
+  --sapphire-global-size-static-40: 16px;
+  --sapphire-global-size-static-30: 12px;
+  --sapphire-global-size-static-20: 8px;
+  --sapphire-global-size-static-15: 6px;
+  --sapphire-global-size-static-10: 4px;
+  --sapphire-global-size-static-5: 2px;
+  --sapphire-global-size-static-2: 1px;
+  --sapphire-global-size-static-0: 0px;
+
+  /* ===== SPACING SCALE ===== */
+  --sapphire-semantic-size-spacing-6xl: var(--sapphire-global-size-generic-180);
+  --sapphire-semantic-size-spacing-5xl: var(--sapphire-global-size-generic-160);
+  --sapphire-semantic-size-spacing-4xl: var(--sapphire-global-size-generic-120);
+  --sapphire-semantic-size-spacing-3xl: var(--sapphire-global-size-generic-100);
+  --sapphire-semantic-size-spacing-2xl: var(--sapphire-global-size-generic-80);
+  --sapphire-semantic-size-spacing-xl: var(--sapphire-global-size-generic-60);
+  --sapphire-semantic-size-spacing-lg: var(--sapphire-global-size-generic-50);
+  --sapphire-semantic-size-spacing-md: var(--sapphire-global-size-generic-40);
+  --sapphire-semantic-size-spacing-sm: var(--sapphire-global-size-generic-30);
+  --sapphire-semantic-size-spacing-xs: var(--sapphire-global-size-generic-20);
+  --sapphire-semantic-size-spacing-2xs: var(--sapphire-global-size-generic-15);
+  --sapphire-semantic-size-spacing-3xs: var(--sapphire-global-size-generic-10);
+  --sapphire-semantic-size-spacing-4xs: var(--sapphire-global-size-generic-5);
+
+  /* Container spacing */
+  --sapphire-semantic-size-spacing-container-horizontal-md: var(--sapphire-semantic-size-spacing-2xl);
+  --sapphire-semantic-size-spacing-container-horizontal-sm: var(--sapphire-semantic-size-spacing-sm);
+  --sapphire-semantic-size-spacing-control-horizontal-lg: var(--sapphire-semantic-size-spacing-md);
+  --sapphire-semantic-size-spacing-control-horizontal-md: var(--sapphire-semantic-size-spacing-sm);
+  --sapphire-semantic-size-spacing-control-vertical-lg: var(--sapphire-semantic-size-spacing-sm);
+  --sapphire-semantic-size-spacing-control-vertical-md: var(--sapphire-semantic-size-spacing-xs);
+  --sapphire-semantic-size-spacing-control-vertical-sm: var(--sapphire-semantic-size-spacing-3xs);
+
+  /* ===== BORDER RADII ===== */
+  --sapphire-semantic-size-radius-2xl: var(--sapphire-global-size-static-40);
+  --sapphire-semantic-size-radius-xl: var(--sapphire-global-size-static-30);
+  --sapphire-semantic-size-radius-lg: var(--sapphire-global-size-static-20);
+  --sapphire-semantic-size-radius-md: var(--sapphire-global-size-static-15);
+  --sapphire-semantic-size-radius-sm: var(--sapphire-global-size-static-10);
+  --sapphire-semantic-size-radius-xs: var(--sapphire-global-size-static-5);
+  --sapphire-semantic-size-radius-popover: var(--sapphire-semantic-size-radius-md);
+
+  /* ===== BORDERS ===== */
+  --sapphire-semantic-size-border-md: var(--sapphire-global-size-static-5);
+  --sapphire-semantic-size-border-sm: var(--sapphire-global-size-static-2);
+  --sapphire-semantic-size-focus-ring: var(--sapphire-semantic-size-border-md);
+
+  /* ===== CONTROL HEIGHTS ===== */
+  --sapphire-semantic-size-height-control-4xl: var(--sapphire-global-size-generic-200);
+  --sapphire-semantic-size-height-control-3xl: var(--sapphire-global-size-generic-180);
+  --sapphire-semantic-size-height-control-2xl: var(--sapphire-global-size-generic-160);
+  --sapphire-semantic-size-height-control-xl: var(--sapphire-global-size-generic-140);
+  --sapphire-semantic-size-height-control-lg: var(--sapphire-global-size-generic-120);
+  --sapphire-semantic-size-height-control-md: var(--sapphire-global-size-generic-100);
+  --sapphire-semantic-size-height-control-sm: var(--sapphire-global-size-generic-80);
+  --sapphire-semantic-size-height-control-xs: var(--sapphire-global-size-generic-60);
+  --sapphire-semantic-size-height-control-2xs: var(--sapphire-global-size-generic-50);
+  --sapphire-semantic-size-height-box-lg: var(--sapphire-semantic-size-height-control-2xs);
+  --sapphire-semantic-size-height-box-md: var(--sapphire-global-size-generic-40);
+
+  /* ===== ICON SIZES ===== */
+  --sapphire-semantic-size-icon-xl: var(--sapphire-global-size-generic-80);
+  --sapphire-semantic-size-icon-lg: var(--sapphire-global-size-generic-60);
+  --sapphire-semantic-size-icon-md: var(--sapphire-global-size-generic-50);
+  --sapphire-semantic-size-icon-sm: var(--sapphire-global-size-generic-40);
+
+  /* ===== FIELD WIDTHS ===== */
+  --sapphire-semantic-size-width-field: var(--sapphire-global-size-generic-750);
+
+  /* ===== SHADOW ===== */
+  --sapphire-global-shadow-md: 0px 0px 0px 1px hsl(212 63% 12% / 0.1) inset, 0px 4px 24px 0px hsl(212 63% 12% / 0.04);
+  --sapphire-semantic-shadow-popover: var(--sapphire-global-shadow-md);
+
+  /* ===== OPACITY ===== */
+  --sapphire-global-opacity-30: 0.3;
+  --sapphire-semantic-opacity-disabled: var(--sapphire-global-opacity-30);
+
+  /* ===== GLOBAL COLORS ===== */
+  --sapphire-global-color-white: hsla(0, 0%, 100%, 1);
+  --sapphire-global-color-black: hsla(0, 0%, 0%, 1);
+  --sapphire-global-color-transparent: hsla(0, 0%, 100%, 0);
+
+  /* Blue scale */
+  --sapphire-global-color-blue-950: hsl(210 100% 9%);
+  --sapphire-global-color-blue-900: hsl(210 100% 14%);
+  --sapphire-global-color-blue-800: hsl(211 100% 21%);
+  --sapphire-global-color-blue-700: hsl(211 100% 28%);
+  --sapphire-global-color-blue-600: hsl(212 100% 37%);
+  --sapphire-global-color-blue-500: hsl(218 92% 49%);
+  --sapphire-global-color-blue-400: hsl(216 100% 63%);
+  --sapphire-global-color-blue-300: hsl(215 100% 74%);
+  --sapphire-global-color-blue-200: hsl(214 100% 83%);
+  --sapphire-global-color-blue-100: hsl(214 100% 90%);
+  --sapphire-global-color-blue-50: hsl(219 100% 95%);
+
+  /* Gray scale */
+  --sapphire-global-color-gray-950: hsl(210 94% 7%);
+  --sapphire-global-color-gray-900: hsl(211 64% 13%);
+  --sapphire-global-color-gray-800: hsl(213 48% 17%);
+  --sapphire-global-color-gray-700: hsl(212 33% 27%);
+  --sapphire-global-color-gray-600: hsl(212 27% 35%);
+  --sapphire-global-color-gray-500: hsl(211 19% 49%);
+  --sapphire-global-color-gray-400: hsl(211 22% 63%);
+  --sapphire-global-color-gray-300: hsl(211 22% 77%);
+  --sapphire-global-color-gray-200: hsl(210 26% 85%);
+  --sapphire-global-color-gray-100: hsl(208 29% 91%);
+  --sapphire-global-color-gray-50: hsl(206 33% 96%);
+
+  /* Sand scale */
+  --sapphire-global-color-sand-950: hsl(39 23% 12%);
+  --sapphire-global-color-sand-900: hsl(41 23% 18%);
+  --sapphire-global-color-sand-800: hsl(43 22% 25%);
+  --sapphire-global-color-sand-700: hsl(42 20% 33%);
+  --sapphire-global-color-sand-600: hsl(42 20% 40%);
+  --sapphire-global-color-sand-500: hsl(43 14% 52%);
+  --sapphire-global-color-sand-400: hsl(39 20% 66%);
+  --sapphire-global-color-sand-300: hsl(48 20% 75%);
+  --sapphire-global-color-sand-200: hsl(48 15% 87%);
+  --sapphire-global-color-sand-100: hsl(60 11% 91%);
+  --sapphire-global-color-sand-50: hsl(60 9% 96%);
+
+  /* Red scale */
+  --sapphire-global-color-red-950: hsl(358 57% 10%);
+  --sapphire-global-color-red-900: hsl(1 53% 17%);
+  --sapphire-global-color-red-800: hsl(358 55% 27%);
+  --sapphire-global-color-red-700: hsl(359 57% 36%);
+  --sapphire-global-color-red-600: hsl(359 59% 44%);
+  --sapphire-global-color-red-500: hsl(0 65% 51%);
+  --sapphire-global-color-red-400: hsl(1 90% 66%);
+  --sapphire-global-color-red-300: hsl(1 92% 74%);
+  --sapphire-global-color-red-200: hsl(2 100% 84%);
+  --sapphire-global-color-red-100: hsl(4 100% 92%);
+  --sapphire-global-color-red-50: hsl(0 82% 96%);
+
+  /* Green scale */
+  --sapphire-global-color-green-950: hsl(129 42% 9%);
+  --sapphire-global-color-green-900: hsl(131 40% 14%);
+  --sapphire-global-color-green-800: hsl(128 38% 18%);
+  --sapphire-global-color-green-700: hsl(129 41% 23%);
+  --sapphire-global-color-green-600: hsl(127 47% 30%);
+  --sapphire-global-color-green-500: hsl(125 50% 35%);
+  --sapphire-global-color-green-400: hsl(122 39% 49%);
+  --sapphire-global-color-green-300: hsl(124 39% 60%);
+  --sapphire-global-color-green-200: hsl(124 42% 73%);
+  --sapphire-global-color-green-100: hsl(125 46% 84%);
+  --sapphire-global-color-green-50: hsl(129 33% 92%);
+
+  /* Yellow scale */
+  --sapphire-global-color-yellow-950: hsl(24 91% 14%);
+  --sapphire-global-color-yellow-900: hsl(25 84% 22%);
+  --sapphire-global-color-yellow-800: hsl(27 86% 28%);
+  --sapphire-global-color-yellow-700: hsl(31 94% 33%);
+  --sapphire-global-color-yellow-600: hsl(36 97% 40%);
+  --sapphire-global-color-yellow-500: hsl(41 95% 46%);
+  --sapphire-global-color-yellow-400: hsl(46 94% 54%);
+  --sapphire-global-color-yellow-300: hsl(46 97% 65%);
+  --sapphire-global-color-yellow-200: hsl(51 92% 75%);
+  --sapphire-global-color-yellow-100: hsl(51 90% 88%);
+  --sapphire-global-color-yellow-50: hsl(53 100% 92%);
+
+  /* Alpha colors */
+  --sapphire-global-color-alpha-blue-500: hsl(215 99% 45% / 0.995);
+  --sapphire-global-color-alpha-blue-400: hsl(216 100% 50% / 0.74);
+  --sapphire-global-color-alpha-blue-300: hsl(215 100% 50% / 0.513);
+  --sapphire-global-color-alpha-blue-200: hsl(214 100% 50% / 0.349);
+  --sapphire-global-color-alpha-blue-100: hsl(214 100% 50% / 0.2);
+  --sapphire-global-color-alpha-blue-50: hsl(219 100% 50% / 0.091);
+  --sapphire-global-color-alpha-gray-900: hsl(211 63% 13% / 0.952);
+  --sapphire-global-color-alpha-gray-800: hsl(213 100% 9% / 0.909);
+  --sapphire-global-color-alpha-gray-700: hsl(213 100% 11% / 0.819);
+  --sapphire-global-color-alpha-gray-600: hsl(212 100% 13% / 0.74);
+  --sapphire-global-color-alpha-gray-500: hsl(212 100% 15% / 0.603);
+  --sapphire-global-color-alpha-gray-400: hsl(211 100% 18% / 0.455);
+  --sapphire-global-color-alpha-gray-300: hsl(211 100% 20% / 0.282);
+  --sapphire-global-color-alpha-gray-200: hsl(210 100% 21% / 0.188);
+  --sapphire-global-color-alpha-gray-100: hsl(208 98% 23% / 0.114);
+  --sapphire-global-color-alpha-gray-50: hsl(206 100% 25% / 0.055);
+  --sapphire-global-color-alpha-sand-950: hsl(40 100% 3% / 0.905);
+  --sapphire-global-color-alpha-sand-900: hsl(41 100% 5% / 0.858);
+  --sapphire-global-color-alpha-sand-500: hsl(43 100% 12% / 0.548);
+  --sapphire-global-color-alpha-sand-400: hsl(39 100% 17% / 0.411);
+  --sapphire-global-color-alpha-sand-300: hsl(48 100% 17% / 0.294);
+  --sapphire-global-color-alpha-sand-200: hsl(48 100% 13% / 0.153);
+  --sapphire-global-color-alpha-sand-100: hsl(60 100% 10% / 0.098);
+  --sapphire-global-color-alpha-sand-50: hsl(60 100% 10% / 0.043);
+  --sapphire-global-color-alpha-red-500: hsl(0 100% 39% / 0.815);
+  --sapphire-global-color-alpha-red-400: hsl(1 100% 47% / 0.65);
+  --sapphire-global-color-alpha-red-50: hsl(0 98% 45% / 0.079);
+  --sapphire-global-color-alpha-green-500: hsl(124 100% 21% / 0.822);
+  --sapphire-global-color-alpha-green-400: hsl(122 100% 28% / 0.701);
+  --sapphire-global-color-alpha-green-50: hsl(129 100% 25% / 0.11);
+  --sapphire-global-color-alpha-yellow-700: hsl(31 100% 32% / 0.979);
+  --sapphire-global-color-alpha-yellow-800: hsl(27 100% 25% / 0.959);
+  --sapphire-global-color-alpha-yellow-900: hsl(25 100% 19% / 0.963);
+  --sapphire-global-color-alpha-yellow-50: hsl(53 100% 50% / 0.161);
+
+  /* Secondary palette */
+  --sapphire-global-color-secondary-blue-4: hsl(220 48% 81%);
+  --sapphire-global-color-secondary-blue-3: hsl(217 60% 71%);
+  --sapphire-global-color-secondary-blue-2: hsl(218 51% 52%);
+  --sapphire-global-color-secondary-blue-1: hsl(212 100% 24%);
+  --sapphire-global-color-secondary-gold-4: hsl(45 57% 73%);
+  --sapphire-global-color-secondary-gold-3: hsl(40 57% 62%);
+  --sapphire-global-color-secondary-gold-2: hsl(32 47% 48%);
+  --sapphire-global-color-secondary-gold-1: hsl(32 59% 28%);
+  --sapphire-global-color-secondary-copper-4: hsl(24 65% 77%);
+  --sapphire-global-color-secondary-copper-3: hsl(21 56% 65%);
+  --sapphire-global-color-secondary-copper-2: hsl(18 52% 49%);
+  --sapphire-global-color-secondary-copper-1: hsl(20 64% 27%);
+  --sapphire-global-color-secondary-green-4: hsl(132 42% 76%);
+  --sapphire-global-color-secondary-green-3: hsl(146 40% 61%);
+  --sapphire-global-color-secondary-green-2: hsl(155 50% 43%);
+  --sapphire-global-color-secondary-green-1: hsl(158 58% 19%);
+
+  /* ===== SEMANTIC COLORS (Light Theme) ===== */
+  --sapphire-semantic-color-foreground-primary: var(--sapphire-global-color-blue-900);
+  --sapphire-semantic-color-foreground-secondary: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.64);
+  --sapphire-semantic-color-foreground-tertiary: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.48);
+  --sapphire-semantic-color-foreground-accent: var(--sapphire-global-color-alpha-blue-500);
+  --sapphire-semantic-color-foreground-link: var(--sapphire-semantic-color-foreground-accent);
+  --sapphire-semantic-color-foreground-negative: var(--sapphire-global-color-alpha-red-500);
+  --sapphire-semantic-color-foreground-warning: var(--sapphire-global-color-alpha-yellow-700);
+  --sapphire-semantic-color-foreground-positive: var(--sapphire-global-color-alpha-green-500);
+  --sapphire-semantic-color-foreground-on-accent: var(--sapphire-global-color-white);
+  --sapphire-semantic-color-foreground-on-negative: var(--sapphire-global-color-white);
+  --sapphire-semantic-color-foreground-on-positive: var(--sapphire-global-color-white);
+  --sapphire-semantic-color-foreground-on-warning: var(--sapphire-global-color-alpha-yellow-900);
+  --sapphire-semantic-color-foreground-on-warning-subtle: var(--sapphire-global-color-alpha-yellow-800);
+  --sapphire-semantic-color-foreground-on-accent-subtle: var(--sapphire-semantic-color-foreground-accent);
+  --sapphire-semantic-color-foreground-on-negative-subtle: var(--sapphire-semantic-color-foreground-negative);
+  --sapphire-semantic-color-foreground-on-positive-subtle: var(--sapphire-semantic-color-foreground-positive);
+  --sapphire-semantic-color-foreground-on-neutral-subtle: var(--sapphire-semantic-color-foreground-primary);
+  --sapphire-semantic-color-foreground-on-signature: var(--sapphire-global-color-white);
+
+  /* Backgrounds */
+  --sapphire-semantic-color-background-surface: var(--sapphire-global-color-white);
+  --sapphire-semantic-color-background-popover: var(--sapphire-global-color-white);
+  --sapphire-semantic-color-background-field: var(--sapphire-global-color-white);
+  --sapphire-semantic-color-background-primary: var(--sapphire-semantic-color-background-surface);
+  --sapphire-semantic-color-background-secondary: var(--sapphire-semantic-color-background-neutral-subtle);
+  --sapphire-semantic-color-background-subtle: var(--sapphire-semantic-color-background-neutral-subtle);
+  --sapphire-semantic-color-surface-primary: var(--sapphire-semantic-color-background-surface);
+  --sapphire-semantic-color-surface-secondary: var(--sapphire-semantic-color-background-neutral-subtle);
+  --sapphire-semantic-color-background-signature: var(--sapphire-global-color-blue-900);
+  --sapphire-semantic-color-background-accent: var(--sapphire-global-color-blue-500);
+  --sapphire-semantic-color-background-positive: var(--sapphire-global-color-green-500);
+  --sapphire-semantic-color-background-warning: var(--sapphire-global-color-yellow-300);
+  --sapphire-semantic-color-background-negative: var(--sapphire-global-color-red-500);
+  --sapphire-semantic-color-background-accent-subtle: var(--sapphire-global-color-alpha-blue-50);
+  --sapphire-semantic-color-background-positive-subtle: var(--sapphire-global-color-alpha-green-50);
+  --sapphire-semantic-color-background-warning-subtle: var(--sapphire-global-color-alpha-yellow-50);
+  --sapphire-semantic-color-background-negative-subtle: var(--sapphire-global-color-alpha-red-50);
+  --sapphire-semantic-color-background-neutral-subtle: var(--sapphire-global-color-alpha-sand-50);
+  --sapphire-semantic-color-feedback-warning: var(--sapphire-semantic-color-foreground-warning);
+  --sapphire-semantic-color-feedback-warning-border: var(--sapphire-semantic-color-foreground-warning);
+  --sapphire-semantic-color-feedback-negative: var(--sapphire-semantic-color-border-negative-default);
+
+  /* Action backgrounds */
+  --sapphire-semantic-color-background-action-primary-default: var(--sapphire-semantic-color-background-accent);
+  --sapphire-semantic-color-background-action-secondary-default: var(--sapphire-global-color-alpha-sand-100);
+  --sapphire-semantic-color-background-action-tertiary-default: var(--sapphire-global-color-transparent);
+  --sapphire-semantic-color-background-action-danger-default: var(--sapphire-semantic-color-background-negative);
+  --sapphire-semantic-color-background-action-danger-secondary-default: var(--sapphire-semantic-color-background-negative-subtle);
+
+  /* Action foregrounds */
+  --sapphire-semantic-color-foreground-action-on-primary-default: var(--sapphire-semantic-color-foreground-on-accent);
+  --sapphire-semantic-color-foreground-action-on-secondary-default: var(--sapphire-semantic-color-foreground-on-neutral-subtle);
+  --sapphire-semantic-color-foreground-action-on-tertiary-default: var(--sapphire-semantic-color-foreground-primary);
+  --sapphire-semantic-color-foreground-action-on-danger-default: var(--sapphire-semantic-color-foreground-on-negative);
+  --sapphire-semantic-color-foreground-action-link-default: var(--sapphire-semantic-color-foreground-accent);
+  --sapphire-semantic-color-foreground-action-danger-default: var(--sapphire-semantic-color-foreground-negative);
+  --sapphire-semantic-color-foreground-action-select-default: var(--sapphire-semantic-color-foreground-accent);
+  --sapphire-semantic-color-foreground-action-on-select-default: var(--sapphire-semantic-color-foreground-on-accent);
+
+  /* Borders */
+  --sapphire-semantic-color-border-primary: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.16);
+  --sapphire-semantic-color-border-secondary: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.08);
+  --sapphire-semantic-color-border-tertiary: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.06);
+  --sapphire-semantic-color-border-default: var(--sapphire-semantic-color-border-primary);
+  --sapphire-semantic-color-border-subtle: var(--sapphire-semantic-color-border-secondary);
+  --sapphire-semantic-color-border-field-default: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.48);
+  --sapphire-semantic-color-border-negative-default: var(--sapphire-global-color-red-500);
+  --sapphire-semantic-color-border-negative: var(--sapphire-semantic-color-border-negative-default);
+  --sapphire-semantic-color-border-positive-default: var(--sapphire-global-color-green-300);
+  --sapphire-semantic-color-border-accent: var(--sapphire-global-color-blue-500);
+  --sapphire-semantic-color-border-focus: var(--sapphire-semantic-color-focus-ring);
+
+  /* Focus */
+  --sapphire-semantic-color-focus-ring: var(--sapphire-global-color-blue-400);
+
+  /* Interaction states */
+  --sapphire-semantic-color-state-accent-default: var(--sapphire-semantic-color-background-accent);
+  --sapphire-semantic-color-state-accent-subtle: var(--sapphire-semantic-color-background-accent-subtle);
+  --sapphire-semantic-color-state-accent-hover: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.12);
+  --sapphire-semantic-color-state-accent-active: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.2);
+  --sapphire-semantic-color-state-negative-default: var(--sapphire-semantic-color-background-negative);
+  --sapphire-semantic-color-state-negative-subtle: var(--sapphire-semantic-color-background-negative-subtle);
+  --sapphire-semantic-color-state-neutral-hover: color(from var(--sapphire-global-color-sand-900) xyz x y z / 0.06);
+  --sapphire-semantic-color-state-neutral-active: color(from var(--sapphire-global-color-sand-900) xyz x y z / 0.1);
+  --sapphire-semantic-color-state-neutral-ghost-hover: color(from var(--sapphire-global-color-sand-900) xyz x y z / 0.06);
+  --sapphire-semantic-color-state-neutral-ghost-active: color(from var(--sapphire-global-color-sand-900) xyz x y z / 0.1);
+  --sapphire-semantic-color-state-neutral-surface-default: var(--sapphire-semantic-color-border-secondary);
+  --sapphire-semantic-color-state-accent-subtle-hover: color(from var(--sapphire-global-color-blue-500) xyz x y z / 0.06);
+  --sapphire-semantic-color-state-accent-subtle-active: color(from var(--sapphire-global-color-blue-500) xyz x y z / 0.12);
+  --sapphire-semantic-color-state-negative-hover: color(from var(--sapphire-global-color-red-900) xyz x y z / 0.12);
+  --sapphire-semantic-color-state-negative-active: color(from var(--sapphire-global-color-red-900) xyz x y z / 0.2);
+  --sapphire-semantic-color-state-negative-subtle-hover: color(from var(--sapphire-global-color-red-500) xyz x y z / 0.06);
+  --sapphire-semantic-color-state-negative-subtle-active: color(from var(--sapphire-global-color-red-500) xyz x y z / 0.1);
+  --sapphire-semantic-color-state-border-hover: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.12);
+  --sapphire-semantic-color-state-border-active: color(from var(--sapphire-global-color-blue-900) xyz x y z / 0.2);
+
+  /* Decorative */
+  --sapphire-semantic-color-background-decorative-neutral: var(--sapphire-global-color-alpha-sand-50);
+  --sapphire-semantic-color-foreground-on-decorative-neutral: var(--sapphire-global-color-blue-900);
+  --sapphire-semantic-color-background-decorative-1: var(--sapphire-global-color-secondary-blue-1);
+  --sapphire-semantic-color-background-decorative-2: var(--sapphire-global-color-secondary-blue-2);
+  --sapphire-semantic-color-background-decorative-3: var(--sapphire-global-color-secondary-blue-3);
+  --sapphire-semantic-color-background-decorative-4: var(--sapphire-global-color-secondary-blue-4);
+  --sapphire-semantic-color-background-decorative-5: var(--sapphire-global-color-secondary-gold-1);
+  --sapphire-semantic-color-background-decorative-6: var(--sapphire-global-color-secondary-gold-2);
+  --sapphire-semantic-color-background-decorative-7: var(--sapphire-global-color-secondary-gold-3);
+  --sapphire-semantic-color-background-decorative-8: var(--sapphire-global-color-secondary-gold-4);
+  --sapphire-semantic-color-background-decorative-9: var(--sapphire-global-color-secondary-copper-1);
+  --sapphire-semantic-color-background-decorative-10: var(--sapphire-global-color-secondary-copper-2);
+  --sapphire-semantic-color-background-decorative-11: var(--sapphire-global-color-secondary-copper-3);
+  --sapphire-semantic-color-background-decorative-12: var(--sapphire-global-color-secondary-copper-4);
+  --sapphire-semantic-color-background-decorative-13: var(--sapphire-global-color-secondary-green-1);
+  --sapphire-semantic-color-background-decorative-14: var(--sapphire-global-color-secondary-green-2);
+  --sapphire-semantic-color-background-decorative-15: var(--sapphire-global-color-secondary-green-3);
+  --sapphire-semantic-color-background-decorative-16: var(--sapphire-global-color-secondary-green-4);
+}
+
+/* Responsive overrides */
+@media screen and (min-width: 960px) {
+  .sapphire-theme-default,
+  .sapphire-theme--secondary,
+  .sapphire-theme--tertiary,
+  .sapphire-theme--contrast {
+    --sapphire-semantic-size-font-heading-sm: var(--sapphire-global-size-font-125);
+    --sapphire-semantic-size-font-heading-md: var(--sapphire-global-size-font-150);
+    --sapphire-semantic-size-font-heading-lg: var(--sapphire-global-size-font-200);
+    --sapphire-semantic-size-font-heading-xl: var(--sapphire-global-size-font-250);
+    --sapphire-semantic-size-font-heading-2xl: var(--sapphire-global-size-font-300);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .sapphire-theme-default,
+  .sapphire-theme--secondary,
+  .sapphire-theme--tertiary,
+  .sapphire-theme--contrast {
+    --sapphire-semantic-time-motion-slow: 0.00s;
+    --sapphire-semantic-time-motion-default: 0.00s;
+    --sapphire-semantic-time-motion-quick: 0.00s;
+  }
+}
+
+/* ===== SURFACE ===== */
+.sapphire-surface {
+  font-family: var(--sapphire-semantic-font-name-default);
+  background: var(--sapphire-semantic-color-background-surface);
+  color: var(--sapphire-semantic-color-foreground-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== TEXT ===== */
+.sapphire-text {
+  font-family: var(--sapphire-semantic-font-name-default);
+  color: var(--sapphire-semantic-color-foreground-primary);
+  font-weight: var(--sapphire-semantic-font-weight-default-regular);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sapphire-text--heading-2xl,
+.sapphire-text--heading-xl,
+.sapphire-text--heading-lg,
+.sapphire-text--heading-md,
+.sapphire-text--heading-sm,
+.sapphire-text--heading-xs {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: var(--sapphire-global-size-line-height-sm);
+  letter-spacing: -0.01em;
+}
+
+.sapphire-text--heading-2xl {
+  font-weight: var(--sapphire-semantic-font-weight-default-regular);
+  font-size: var(--sapphire-semantic-size-font-heading-2xl);
+}
+.sapphire-text--heading-xl {
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+  font-size: var(--sapphire-semantic-size-font-heading-xl);
+}
+.sapphire-text--heading-lg {
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+  font-size: var(--sapphire-semantic-size-font-heading-lg);
+}
+.sapphire-text--heading-md {
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+  font-size: var(--sapphire-semantic-size-font-heading-md);
+}
+.sapphire-text--heading-sm {
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+  font-size: var(--sapphire-semantic-size-font-heading-sm);
+}
+.sapphire-text--heading-xs {
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+  font-size: var(--sapphire-semantic-size-font-heading-xs);
+}
+
+.sapphire-text--body-lg,
+.sapphire-text--body-md,
+.sapphire-text--body-sm,
+.sapphire-text--body-xs {
+  line-height: var(--sapphire-global-size-line-height-md);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.sapphire-text--body-lg { font-size: var(--sapphire-semantic-size-font-body-lg); }
+.sapphire-text--body-md { font-size: var(--sapphire-semantic-size-font-body-md); }
+.sapphire-text--body-sm { font-size: var(--sapphire-semantic-size-font-body-sm); }
+.sapphire-text--body-xs { font-size: var(--sapphire-semantic-size-font-body-xs); }
+
+.sapphire-text--caption-md {
+  font-weight: var(--sapphire-semantic-font-weight-default-bold);
+  line-height: var(--sapphire-global-size-line-height-sm);
+  font-size: var(--sapphire-semantic-size-font-body-sm);
+}
+.sapphire-text--caption-sm {
+  font-weight: var(--sapphire-semantic-font-weight-default-bold);
+  line-height: var(--sapphire-global-size-line-height-sm);
+  font-size: var(--sapphire-semantic-size-font-body-xs);
+}
+
+.sapphire-text--strong { font-weight: var(--sapphire-semantic-font-weight-default-bold); }
+.sapphire-text--semibold { font-weight: var(--sapphire-semantic-font-weight-default-medium); }
+.sapphire-text--secondary { color: var(--sapphire-semantic-color-foreground-secondary); }
+.sapphire-text--positive { color: var(--sapphire-semantic-color-foreground-positive); }
+.sapphire-text--warning { color: var(--sapphire-semantic-color-foreground-warning); }
+.sapphire-text--negative { color: var(--sapphire-semantic-color-foreground-negative); }
+.sapphire-text--accent { color: var(--sapphire-semantic-color-foreground-accent); }
+
+/* ===== CARD ===== */
+.sapphire-card {
+  background: var(--sapphire-semantic-color-background-surface);
+  border: var(--sapphire-semantic-size-border-sm) solid var(--sapphire-semantic-color-border-secondary);
+  border-radius: var(--sapphire-semantic-size-radius-lg);
+  padding: var(--sapphire-semantic-size-spacing-xl);
+  font-family: var(--sapphire-semantic-font-name-default);
+  color: var(--sapphire-semantic-color-foreground-primary);
+}
+
+.sapphire-card--elevated {
+  border: none;
+  box-shadow: var(--sapphire-semantic-shadow-popover);
+}
+
+/* ===== SEPARATOR ===== */
+.sapphire-separator {
+  height: 1px;
+  background-color: var(--sapphire-semantic-color-border-secondary);
+  border: none;
+  width: 100%;
+}
+
+/* ===== LAYOUT ===== */
+.sapphire-stack { display: flex; flex-direction: column; }
+.sapphire-stack--gap-xs { gap: var(--sapphire-semantic-size-spacing-xs); }
+.sapphire-stack--gap-sm { gap: var(--sapphire-semantic-size-spacing-sm); }
+.sapphire-stack--gap-md { gap: var(--sapphire-semantic-size-spacing-md); }
+.sapphire-stack--gap-lg { gap: var(--sapphire-semantic-size-spacing-lg); }
+.sapphire-stack--gap-xl { gap: var(--sapphire-semantic-size-spacing-xl); }
+
+.sapphire-row { display: flex; flex-direction: row; align-items: center; }
+.sapphire-row--gap-xs { gap: var(--sapphire-semantic-size-spacing-xs); }
+.sapphire-row--gap-sm { gap: var(--sapphire-semantic-size-spacing-sm); }
+.sapphire-row--gap-md { gap: var(--sapphire-semantic-size-spacing-md); }
+.sapphire-row--gap-lg { gap: var(--sapphire-semantic-size-spacing-lg); }
+
+.sapphire-container {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 var(--sapphire-semantic-size-spacing-container-horizontal-md);
+}
+
+/* ===== BUTTON ===== */
+.sapphire-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin: 0;
+  font-family: var(--sapphire-semantic-font-name-default);
+  font-weight: var(--sapphire-semantic-font-weight-default-regular);
+  font-size: var(--sapphire-semantic-size-font-control-md);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0 var(--sapphire-semantic-size-spacing-md);
+  height: var(--sapphire-semantic-size-height-control-md);
+  min-width: var(--sapphire-global-size-generic-200);
+  width: fit-content;
+  max-width: 100%;
+  border-radius: var(--sapphire-semantic-size-height-control-md);
+  border: none;
+  transition: opacity 0.1s, background 0.1s, color 0.1s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sapphire-button__content {
+  align-items: center;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+  padding: 0 var(--sapphire-semantic-size-spacing-xs);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sapphire-button--primary {
+  background: var(--sapphire-semantic-color-background-action-primary-default);
+  color: var(--sapphire-semantic-color-foreground-action-on-primary-default);
+}
+.sapphire-button--secondary {
+  background: var(--sapphire-semantic-color-background-action-secondary-default);
+  color: var(--sapphire-semantic-color-foreground-action-on-secondary-default);
+}
+.sapphire-button--tertiary {
+  background: transparent;
+  color: var(--sapphire-semantic-color-foreground-action-on-tertiary-default);
+}
+.sapphire-button--danger {
+  background: var(--sapphire-semantic-color-background-action-danger-default);
+  color: var(--sapphire-semantic-color-foreground-action-on-danger-default);
+}
+.sapphire-button--danger-secondary {
+  background: var(--sapphire-semantic-color-background-action-danger-secondary-default);
+  color: var(--sapphire-semantic-color-foreground-on-negative-subtle);
+}
+.sapphire-button--danger-tertiary {
+  background: transparent;
+  color: var(--sapphire-semantic-color-foreground-action-danger-default);
+}
+.sapphire-button--text {
+  color: var(--sapphire-semantic-color-foreground-action-link-default);
+  border-radius: var(--sapphire-semantic-size-radius-xs);
+  background: transparent;
+  padding: 0;
+  min-width: unset;
+}
+
+.sapphire-button--lg {
+  height: var(--sapphire-semantic-size-height-control-lg);
+  min-width: var(--sapphire-global-size-generic-240);
+  padding: 0 var(--sapphire-semantic-size-spacing-lg);
+  font-size: var(--sapphire-semantic-size-font-control-lg);
+  border-radius: var(--sapphire-semantic-size-height-control-lg);
+}
+.sapphire-button--sm {
+  height: var(--sapphire-semantic-size-height-control-sm);
+  min-width: var(--sapphire-global-size-generic-160);
+  padding: 0 var(--sapphire-semantic-size-spacing-sm);
+  font-size: var(--sapphire-semantic-size-font-control-sm);
+  border-radius: var(--sapphire-semantic-size-height-control-sm);
+}
+
+.sapphire-button:disabled {
+  opacity: var(--sapphire-semantic-opacity-disabled);
+  cursor: not-allowed;
+}
+.sapphire-button:focus-visible {
+  outline: var(--sapphire-semantic-size-focus-ring) solid var(--sapphire-semantic-color-focus-ring);
+  outline-offset: var(--sapphire-semantic-size-focus-ring);
+}
+.sapphire-button--primary:not(:disabled):hover { filter: brightness(0.92); }
+.sapphire-button--secondary:not(:disabled):hover { filter: brightness(0.95); }
+.sapphire-button--tertiary:not(:disabled):hover {
+  background: var(--sapphire-semantic-color-state-neutral-ghost-hover);
+}
+.sapphire-button--text:not(:disabled):hover { text-decoration: underline; }
+
+.sapphire-button__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--sapphire-semantic-size-icon-sm);
+  width: var(--sapphire-semantic-size-icon-sm);
+}
+.sapphire-button--lg .sapphire-button__icon {
+  height: var(--sapphire-semantic-size-icon-md);
+  width: var(--sapphire-semantic-size-icon-md);
+}
+
+/* ===== TEXT FIELD ===== */
+.sapphire-text-field {
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--sapphire-semantic-size-height-control-lg);
+  padding: 0 var(--sapphire-semantic-size-spacing-sm);
+  font-family: var(--sapphire-semantic-font-name-default);
+  font-size: var(--sapphire-semantic-size-font-body-md);
+  color: var(--sapphire-semantic-color-foreground-primary);
+  background: var(--sapphire-semantic-color-background-field);
+  border: var(--sapphire-semantic-size-border-sm) solid var(--sapphire-semantic-color-border-field-default);
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  outline: none;
+  transition: border-color var(--sapphire-semantic-time-motion-default);
+}
+.sapphire-text-field::placeholder {
+  color: var(--sapphire-semantic-color-foreground-secondary);
+}
+.sapphire-text-field:focus {
+  border-color: var(--sapphire-semantic-color-border-accent);
+  box-shadow: 0 0 0 var(--sapphire-semantic-size-border-sm) var(--sapphire-semantic-color-focus-ring);
+}
+.sapphire-text-field:disabled {
+  opacity: var(--sapphire-semantic-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.sapphire-field-label {
+  display: block;
+  font-family: var(--sapphire-semantic-font-name-default);
+  font-size: var(--sapphire-semantic-size-font-label-md);
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+  color: var(--sapphire-semantic-color-foreground-primary);
+  margin-bottom: var(--sapphire-semantic-size-spacing-3xs);
+}
+
+/* ===== BADGE ===== */
+.sapphire-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--sapphire-semantic-size-height-control-xs);
+  padding: 0 var(--sapphire-semantic-size-spacing-xs);
+  border-radius: var(--sapphire-semantic-size-height-control-xs);
+  font-family: var(--sapphire-semantic-font-name-default);
+  font-size: var(--sapphire-semantic-size-font-body-xs);
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+  white-space: nowrap;
+}
+.sapphire-badge--sm {
+  height: var(--sapphire-semantic-size-height-control-2xs);
+  font-size: var(--sapphire-semantic-size-font-body-xs);
+  padding: 0 var(--sapphire-semantic-size-spacing-2xs);
+}
+.sapphire-badge--neutral {
+  background: var(--sapphire-semantic-color-background-neutral-subtle);
+  color: var(--sapphire-semantic-color-foreground-on-neutral-subtle);
+}
+.sapphire-badge--accent {
+  background: var(--sapphire-semantic-color-background-accent-subtle);
+  color: var(--sapphire-semantic-color-foreground-on-accent-subtle);
+}
+.sapphire-badge--positive {
+  background: var(--sapphire-semantic-color-background-positive-subtle);
+  color: var(--sapphire-semantic-color-foreground-on-positive-subtle);
+}
+.sapphire-badge--warning {
+  background: var(--sapphire-semantic-color-background-warning-subtle);
+  color: var(--sapphire-semantic-color-foreground-on-warning-subtle);
+}
+.sapphire-badge--negative {
+  background: var(--sapphire-semantic-color-background-negative-subtle);
+  color: var(--sapphire-semantic-color-foreground-on-negative-subtle);
+}
+
+/* ===== APP LAYOUT ===== */
+.ecm-layout {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+.ecm-skip-link {
+  background: var(--sapphire-semantic-color-background-primary);
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  box-shadow: 0 0 0 2px var(--sapphire-semantic-color-border-focus);
+  color: var(--sapphire-semantic-color-foreground-primary);
+  left: var(--sapphire-semantic-size-spacing-md);
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-sm);
+  position: absolute;
+  text-decoration: none;
+  top: var(--sapphire-semantic-size-spacing-md);
+  transform: translateY(-200%);
+  transition: transform var(--sapphire-semantic-time-motion-default);
+  z-index: 40;
+}
+
+.ecm-skip-link:focus {
+  transform: translateY(0);
+}
+
+.ecm-sidebar {
+  width: 15rem;
+  background: var(--sapphire-semantic-color-background-signature);
+  color: var(--sapphire-semantic-color-foreground-on-signature);
+  padding: var(--sapphire-semantic-size-spacing-xl);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.ecm-sidebar__header {
+  align-items: center;
+  display: flex;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  justify-content: space-between;
+  margin-bottom: var(--sapphire-semantic-size-spacing-2xl);
+}
+
+.ecm-sidebar__title {
+  font-family: var(--sapphire-semantic-font-name-default);
+  font-size: var(--sapphire-semantic-size-font-heading-sm);
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+  color: var(--sapphire-global-color-white);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.ecm-sidebar__close,
+.ecm-layout__scrim,
+.ecm-layout__mobileBar {
+  display: none;
+}
+
+.ecm-sidebar__nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ecm-sidebar__nav-item {
+  margin-bottom: var(--sapphire-semantic-size-spacing-3xs);
+}
+
+.ecm-sidebar__nav-link {
+  display: block;
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-sm);
+  color: color(from var(--sapphire-global-color-white) xyz x y z / 0.7);
+  text-decoration: none;
+  font-family: var(--sapphire-semantic-font-name-default);
+  font-size: var(--sapphire-semantic-size-font-body-sm);
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  transition: background var(--sapphire-semantic-time-motion-default), color var(--sapphire-semantic-time-motion-default);
+}
+
+.ecm-sidebar__nav-link:hover {
+  background: color(from var(--sapphire-global-color-white) xyz x y z / 0.1);
+  color: var(--sapphire-global-color-white);
+}
+
+.ecm-main {
+  flex: 1;
+  padding: var(--sapphire-semantic-size-spacing-2xl);
+  background: var(--sapphire-global-color-sand-50);
+  overflow-y: auto;
+}
+
+.ecm-layout__mobileTitle {
+  color: var(--sapphire-semantic-color-foreground-primary);
+  font-family: var(--sapphire-semantic-font-name-default);
+  font-size: var(--sapphire-semantic-size-font-body-md);
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+}
+
+@media (max-width: 56rem) {
+  .ecm-layout {
+    display: block;
+  }
+
+  .ecm-layout__mobileBar {
+    align-items: center;
+    display: flex;
+    gap: var(--sapphire-semantic-size-spacing-sm);
+    justify-content: space-between;
+    margin-bottom: var(--sapphire-semantic-size-spacing-lg);
+  }
+
+  .ecm-layout__scrim {
+    background: color(from var(--sapphire-global-color-gray-900) xyz x y z / 0.35);
+    border: 0;
+    cursor: pointer;
+    inset: 0;
+    opacity: 0;
+    padding: 0;
+    pointer-events: none;
+    position: fixed;
+    transition: opacity var(--sapphire-semantic-time-motion-default);
+    z-index: 20;
+  }
+
+  .ecm-layout--sidebar-open .ecm-layout__scrim {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .ecm-sidebar {
+    bottom: 0;
+    left: 0;
+    max-width: calc(100vw - 3rem);
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform var(--sapphire-semantic-time-motion-default);
+    width: min(18rem, calc(100vw - 3rem));
+    z-index: 30;
+  }
+
+  .ecm-layout--sidebar-open .ecm-sidebar {
+    transform: translateX(0);
+  }
+
+  .ecm-sidebar__close {
+    background: transparent;
+    border: 0;
+    color: var(--sapphire-global-color-white);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--sapphire-semantic-font-name-default);
+    font-size: var(--sapphire-semantic-size-font-body-sm);
+    font-weight: var(--sapphire-semantic-font-weight-default-medium);
+    padding: 0;
+  }
+
+  .ecm-main {
+    padding: var(--sapphire-semantic-size-spacing-lg);
+  }
+}

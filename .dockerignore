@@ -1,0 +1,16 @@
+node_modules
+**/node_modules
+dist
+**/dist
+coverage
+**/coverage
+.git
+.github
+.copilot
+.env
+playwright-report
+test-results
+build.log
+lint.log
+test.log
+*.local

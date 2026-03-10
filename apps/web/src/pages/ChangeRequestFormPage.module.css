@@ -1,0 +1,93 @@
+.formCard {
+  max-width: 52rem;
+}
+
+.formGrid {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-md);
+}
+
+.pickerSearch {
+  display: flex;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  align-items: flex-end;
+  flex-wrap: nowrap;
+}
+
+.pickerResults {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--sapphire-semantic-color-border-default);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  max-height: 12rem;
+  overflow-y: auto;
+  background: var(--sapphire-semantic-color-background-primary);
+}
+
+.pickerResult {
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-sm);
+  cursor: pointer;
+  font-size: var(--sapphire-semantic-size-font-sm);
+  border-bottom: 1px solid var(--sapphire-semantic-color-border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pickerResult:last-child {
+  border-bottom: none;
+}
+
+.pickerResult:hover {
+  background: var(--sapphire-semantic-color-state-neutral-ghost-hover);
+}
+
+.selectedList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}
+
+.selectedItem {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-sm);
+  background: var(--sapphire-semantic-color-background-subtle);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  font-size: var(--sapphire-semantic-size-font-sm);
+}
+
+.selectedItemName {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+  padding: 0;
+  line-height: 1;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.removeButton:hover {
+  color: var(--sapphire-semantic-color-foreground-primary);
+}
+
+.formActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  align-items: center;
+}

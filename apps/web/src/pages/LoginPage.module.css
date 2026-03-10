@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--sapphire-semantic-color-surface-secondary);
+  padding: var(--sapphire-semantic-size-spacing-md);
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--sapphire-semantic-color-surface-primary);
+  border-radius: var(--sapphire-semantic-size-radius-lg);
+  padding: var(--sapphire-semantic-size-spacing-xl);
+  box-shadow: var(--sapphire-semantic-effect-shadow-md);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--sapphire-semantic-size-spacing-lg);
+}
+
+.header h1 {
+  margin-bottom: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-md);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.label {
+  font-size: var(--sapphire-semantic-size-font-sm);
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+  color: var(--sapphire-semantic-color-foreground-primary);
+}
+
+.error {
+  padding: var(--sapphire-semantic-size-spacing-sm);
+  background: var(--sapphire-semantic-color-state-negative-subtle);
+  color: var(--sapphire-semantic-color-state-negative-default);
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  font-size: var(--sapphire-semantic-size-font-sm);
+}
+
+.footer {
+  margin-top: var(--sapphire-semantic-size-spacing-md);
+  padding-top: var(--sapphire-semantic-size-spacing-md);
+  border-top: 1px solid var(--sapphire-semantic-color-border-primary);
+}

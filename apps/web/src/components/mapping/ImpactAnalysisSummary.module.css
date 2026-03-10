@@ -1,0 +1,31 @@
+.metricsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.metricBox {
+  flex: 1;
+  min-width: 8rem;
+  padding: var(--sapphire-semantic-size-spacing-sm);
+  background: var(--sapphire-semantic-color-background-subtle);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  text-align: center;
+}
+
+.metricValue {
+  font-size: var(--sapphire-semantic-size-font-heading-sm);
+  font-weight: var(--sapphire-semantic-font-weight-default-bold);
+  color: var(--sapphire-semantic-color-foreground-primary);
+}
+
+.metricLabel {
+  font-size: var(--sapphire-semantic-size-font-label-sm);
+  color: var(--sapphire-semantic-color-foreground-secondary);
+  text-transform: uppercase;
+}
+
+.generatedAt {
+  font-size: var(--sapphire-semantic-size-font-body-xs);
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+}

@@ -1,0 +1,40 @@
+{
+  "name": "ecm-management",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ECM Management Platform - Monorepo",
+  "license": "MIT",
+  "author": "Thomas Klok Rohde <rohde.thomas@gmail.com>",
+  "homepage": "https://github.com/ThomasRohde/ecm-management#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasRohde/ecm-management.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThomasRohde/ecm-management/issues"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"pnpm --filter @ecm/api dev\" \"pnpm --filter @ecm/web dev\"",
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "test:integration": "pnpm --filter @ecm/api run test:integration",
+    "test:ci": "pnpm lint && pnpm test && pnpm test:integration && pnpm build",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "lint": "pnpm -r run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\""
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.20.0",
+    "prettier": "^3.5.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.56.1"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

@@ -1,0 +1,63 @@
+.pageHeader {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sapphire-semantic-size-spacing-lg);
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--sapphire-semantic-size-spacing-md);
+}
+
+.filterField {
+  min-width: 0;
+}
+
+.list {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  width: 100%;
+}
+
+.cardHeader {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sapphire-semantic-size-spacing-md);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--sapphire-semantic-size-spacing-md);
+}
+
+.details {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.jsonBlock {
+  margin: 0;
+  padding: var(--sapphire-semantic-size-spacing-sm);
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  background: var(--sapphire-semantic-color-surface-secondary);
+  color: var(--sapphire-semantic-color-foreground-primary);
+  font-size: var(--sapphire-semantic-size-font-xs);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

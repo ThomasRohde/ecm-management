@@ -1,0 +1,153 @@
+.pageHeader {
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+/* ─── Analysis-only notice ───────────────────────────────────────────────── */
+
+.analysisOnlyNotice {
+  background: var(--sapphire-semantic-color-background-neutral-subtle);
+  border: 1px solid var(--sapphire-semantic-color-border-secondary);
+  border-left: 3px solid var(--sapphire-semantic-color-border-accent, var(--sapphire-global-color-blue-400));
+  border-radius: 0 var(--sapphire-semantic-size-radius-sm) var(--sapphire-semantic-size-radius-sm) 0;
+  padding: var(--sapphire-semantic-size-spacing-sm) var(--sapphire-semantic-size-spacing-md);
+  font-size: var(--sapphire-semantic-size-font-sm);
+  line-height: 1.5;
+  color: var(--sapphire-semantic-color-foreground-secondary);
+}
+
+/* ─── Branch list ─────────────────────────────────────────────────────────── */
+
+.branchList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.branchCard {
+  transition: box-shadow 0.1s;
+}
+
+.branchCardSelected {
+  outline: 2px solid var(--sapphire-semantic-color-border-accent, var(--sapphire-global-color-blue-400));
+  outline-offset: -2px;
+}
+
+.branchCardRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  flex-wrap: wrap;
+}
+
+.branchCardBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.branchCardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  align-items: center;
+}
+
+.branchCardFootnote {
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+  font-size: var(--sapphire-semantic-size-font-sm);
+}
+
+.branchCardActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  flex-shrink: 0;
+}
+
+.actionButtonActive {
+  outline: 2px solid var(--sapphire-semantic-color-border-accent, var(--sapphire-global-color-blue-400));
+  outline-offset: -1px;
+}
+
+/* ─── Loading state ───────────────────────────────────────────────────────── */
+
+.loadingList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.loadingCard {
+  padding: var(--sapphire-semantic-size-spacing-md);
+}
+
+/* ─── Diff panel ──────────────────────────────────────────────────────────── */
+
+.diffPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-md);
+}
+
+.diffPanelHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+  flex-wrap: wrap;
+}
+
+.diffSummaryBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.diffEntryList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.diffEntry {
+  border: 1px solid var(--sapphire-semantic-color-border-subtle);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  padding: var(--sapphire-semantic-size-spacing-xs);
+}
+
+/* ─── Modified entry (field-name-only summary when snapshots unavailable) ── */
+
+.modifiedEntry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}
+
+.modifiedEntryHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  flex-wrap: wrap;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .branchCardRow {
+    flex-direction: column;
+  }
+
+  .branchCardActions {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .pageHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

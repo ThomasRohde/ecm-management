@@ -1,0 +1,10 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.item {
+  text-decoration: none;
+  color: inherit;
+}

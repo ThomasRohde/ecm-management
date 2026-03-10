@@ -1,0 +1,261 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  flex-wrap: wrap;
+}
+
+/* ─── Structured list layout ─────────────────────────────────────────────── */
+
+.diffList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}
+
+.diffItem {
+  border: 1px solid var(--sapphire-semantic-color-border-secondary);
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  overflow: hidden;
+}
+
+.diffItem--added {
+  border-color: var(--sapphire-semantic-color-border-positive-default, var(--sapphire-global-color-green-300));
+}
+
+.diffItem--removed {
+  border-color: var(--sapphire-semantic-color-border-negative-default);
+}
+
+.diffItem--modified {
+  border-color: var(--sapphire-semantic-color-border-accent, var(--sapphire-global-color-blue-300));
+}
+
+.diffItemRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-sm);
+  min-height: 2.5rem;
+}
+
+.kindIndicator {
+  display: inline-block;
+  width: 0.25rem;
+  min-width: 0.25rem;
+  height: 1.25rem;
+  border-radius: var(--sapphire-semantic-size-radius-xs);
+}
+
+.kindIndicator--added {
+  background: var(--sapphire-semantic-color-foreground-positive);
+}
+
+.kindIndicator--removed {
+  background: var(--sapphire-semantic-color-foreground-negative);
+}
+
+.kindIndicator--modified {
+  background: var(--sapphire-semantic-color-foreground-accent);
+}
+
+.fieldLabel {
+  min-width: 8rem;
+  max-width: 14rem;
+  flex-shrink: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.diffValues {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  flex: 1;
+  min-width: 0;
+}
+
+.valueCell {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20rem;
+}
+
+.valueAdded {
+  color: var(--sapphire-semantic-color-foreground-positive);
+}
+
+.valueRemoved {
+  color: var(--sapphire-semantic-color-foreground-negative);
+  text-decoration: line-through;
+}
+
+.valueModified {
+  color: var(--sapphire-semantic-color-foreground-accent);
+}
+
+.arrow {
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+  flex-shrink: 0;
+}
+
+.kindBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--sapphire-semantic-size-spacing-2xs);
+  height: 1.25rem;
+  border-radius: var(--sapphire-semantic-size-radius-2xl);
+  font-size: var(--sapphire-semantic-size-font-xs);
+  font-weight: 500;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.kindBadge--added {
+  background: var(--sapphire-semantic-color-background-positive-subtle);
+  color: var(--sapphire-semantic-color-foreground-positive);
+}
+
+.kindBadge--removed {
+  background: var(--sapphire-semantic-color-background-negative-subtle);
+  color: var(--sapphire-semantic-color-foreground-negative);
+}
+
+.kindBadge--modified {
+  background: var(--sapphire-semantic-color-background-accent-subtle);
+  color: var(--sapphire-semantic-color-foreground-accent);
+}
+
+.expandButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+  font-size: 0.625rem;
+  padding: 0.25rem;
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.expandButton:hover {
+  background: var(--sapphire-semantic-color-state-neutral-ghost-hover);
+  color: var(--sapphire-semantic-color-foreground-primary);
+}
+
+.expandButton:focus-visible {
+  outline: var(--sapphire-semantic-size-focus-ring) solid var(--sapphire-global-color-blue-400);
+  outline-offset: 2px;
+}
+
+/* ─── Expandable detail ───────────────────────────────────────────────────── */
+
+.expandedContent {
+  display: flex;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-sm);
+  border-top: 1px solid var(--sapphire-semantic-color-border-subtle);
+  background: var(--sapphire-semantic-color-background-neutral-subtle);
+  flex-wrap: wrap;
+}
+
+.expandedPanel {
+  flex: 1;
+  min-width: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-3xs);
+}
+
+.rawValue {
+  margin: 0;
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: var(--sapphire-semantic-size-font-xs);
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--sapphire-semantic-color-foreground-secondary);
+  background: var(--sapphire-semantic-color-background-primary);
+  border: 1px solid var(--sapphire-semantic-color-border-subtle);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  padding: var(--sapphire-semantic-size-spacing-2xs) var(--sapphire-semantic-size-spacing-xs);
+}
+
+/* ─── Side-by-side layout ────────────────────────────────────────────────── */
+
+.sideBySide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+@media (max-width: 600px) {
+  .sideBySide {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  border: 1px solid var(--sapphire-semantic-color-border-secondary);
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.panelHeading {
+  padding: var(--sapphire-semantic-size-spacing-2xs) var(--sapphire-semantic-size-spacing-xs);
+  background: var(--sapphire-semantic-color-background-neutral-subtle);
+  border-bottom: 1px solid var(--sapphire-semantic-color-border-subtle);
+  font-weight: 500;
+}
+
+.panelItem {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  padding: var(--sapphire-semantic-size-spacing-2xs) var(--sapphire-semantic-size-spacing-xs);
+  border-bottom: 1px solid var(--sapphire-semantic-color-border-subtle);
+}
+
+.panelItem:last-child {
+  border-bottom: none;
+}
+
+.panelItem--added {
+  background: var(--sapphire-semantic-color-background-positive-subtle);
+}
+
+.panelItem--removed {
+  background: var(--sapphire-semantic-color-background-negative-subtle);
+}
+
+.panelItem--modified {
+  background: var(--sapphire-semantic-color-background-accent-subtle);
+}
+
+.panelFieldLabel {
+  min-width: 7rem;
+  max-width: 12rem;
+  flex-shrink: 0;
+  color: var(--sapphire-semantic-color-foreground-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panelValue {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}

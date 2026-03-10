@@ -1,0 +1,44 @@
+.skeleton {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--sapphire-semantic-color-background-neutral-subtle) 0%,
+    var(--sapphire-semantic-color-background-accent-subtle) 50%,
+    var(--sapphire-semantic-color-background-neutral-subtle) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer var(--sapphire-semantic-time-fade-slow)
+    var(--sapphire-semantic-transitions-standard) infinite;
+}
+
+.radiusSm {
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+}
+
+.radiusMd {
+  border-radius: var(--sapphire-semantic-size-radius-md);
+}
+
+.radiusLg {
+  border-radius: var(--sapphire-semantic-size-radius-lg);
+}
+
+.radiusPill {
+  border-radius: var(--sapphire-semantic-size-radius-2xl);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .skeleton {
+    animation: none;
+  }
+}

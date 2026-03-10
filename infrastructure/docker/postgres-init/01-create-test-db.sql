@@ -1,0 +1,1 @@
+CREATE DATABASE ecm_test;

@@ -1,0 +1,17 @@
+.bell {
+  position: relative;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  padding: 0 var(--sapphire-semantic-size-spacing-2xs);
+  margin-left: var(--sapphire-semantic-size-spacing-xs);
+  border-radius: var(--sapphire-semantic-size-radius-pill);
+  background: var(--sapphire-semantic-color-state-accent-default);
+  color: var(--sapphire-semantic-color-foreground-on-accent);
+  font-size: var(--sapphire-semantic-size-font-xs);
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+}

@@ -1,0 +1,220 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.fieldGrid {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-3xs);
+}
+
+.fieldLabel {
+  font-size: var(--sapphire-semantic-size-font-sm);
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.fieldValue {
+  font-size: var(--sapphire-semantic-size-font-md);
+  color: var(--sapphire-semantic-color-foreground-primary);
+}
+
+.affectedList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}
+
+.affectedItem {
+  font-size: var(--sapphire-semantic-size-font-sm);
+}
+
+.affectedLink {
+  color: var(--sapphire-semantic-color-foreground-link);
+  text-decoration: none;
+}
+
+.affectedLink:hover {
+  text-decoration: underline;
+}
+
+.actionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  align-items: center;
+}
+
+.decisionsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--sapphire-semantic-size-font-sm);
+}
+
+.decisionsTable th,
+.decisionsTable td {
+  text-align: left;
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-sm);
+  border-bottom: 1px solid var(--sapphire-semantic-color-border-subtle);
+}
+
+.decisionsTable th {
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.auditTimeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.auditTimeline::before {
+  content: '';
+  position: absolute;
+  left: 0.6rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: var(--sapphire-semantic-color-border-subtle);
+  z-index: 0;
+}
+
+.auditEntry {
+  position: relative;
+  padding-left: 2rem;
+  padding-bottom: var(--sapphire-semantic-size-spacing-md);
+}
+
+.auditEntry:last-child {
+  padding-bottom: 0;
+}
+
+.auditDot {
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--sapphire-semantic-color-background-subtle);
+  border: 2px solid var(--sapphire-semantic-color-border-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  z-index: 1;
+}
+
+.auditEntryContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-3xs);
+}
+
+.auditEventType {
+  font-size: var(--sapphire-semantic-size-font-sm);
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+  color: var(--sapphire-semantic-color-foreground-primary);
+}
+
+.auditMeta {
+  font-size: var(--sapphire-semantic-size-font-xs);
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+}
+
+.auditComment {
+  font-size: var(--sapphire-semantic-size-font-sm);
+  color: var(--sapphire-semantic-color-foreground-secondary);
+  font-style: italic;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  padding: var(--sapphire-semantic-size-spacing-sm);
+  background: var(--sapphire-semantic-color-background-subtle);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  border: 1px solid var(--sapphire-semantic-color-border-subtle);
+}
+
+.commentFormActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+/* ─── Execution status panel ──────────────────────────────────────────────── */
+
+.executionHeader {
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.workflowSteps {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  flex-wrap: wrap;
+  padding: var(--sapphire-semantic-size-spacing-xs) 0;
+  border-top: 1px solid var(--sapphire-semantic-color-border-subtle);
+  border-bottom: 1px solid var(--sapphire-semantic-color-border-subtle);
+}
+
+.workflowStep {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+  font-size: var(--sapphire-semantic-size-font-sm);
+}
+
+.workflowStepDone {
+  color: var(--sapphire-semantic-color-foreground-positive);
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+}
+
+.workflowStepCurrent {
+  color: var(--sapphire-semantic-color-foreground-primary);
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+}
+
+.workflowStepPending {
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+}
+
+.workflowConnector {
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+  font-size: var(--sapphire-semantic-size-font-sm);
+  user-select: none;
+}
+
+.operationInfoBox {
+  padding: var(--sapphire-semantic-size-spacing-sm);
+  background: var(--sapphire-semantic-color-background-subtle);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  border: 1px solid var(--sapphire-semantic-color-border-subtle);
+  border-left: 3px solid var(--sapphire-semantic-color-foreground-warning);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}

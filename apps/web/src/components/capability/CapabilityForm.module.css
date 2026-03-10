@@ -1,0 +1,38 @@
+.fieldGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--sapphire-semantic-size-spacing-md);
+  align-items: start;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.textArea {
+  min-height: calc(var(--sapphire-semantic-size-height-control-lg) * 3.5);
+  padding-top: var(--sapphire-semantic-size-spacing-sm);
+  padding-bottom: var(--sapphire-semantic-size-spacing-sm);
+  resize: vertical;
+}
+
+.helperText {
+  margin: 0;
+}
+
+.errorSummary {
+  border-left: 4px solid var(--sapphire-semantic-color-border-negative);
+  padding-left: calc(
+    var(--sapphire-semantic-size-spacing-xl) - var(--sapphire-semantic-size-spacing-xs)
+  );
+}
+
+.errorList {
+  margin: 0;
+  padding-left: var(--sapphire-semantic-size-spacing-md);
+}
+
+.actionRow {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,43 @@
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-md);
+  background: color-mix(in srgb, var(--sapphire-semantic-color-feedback-warning) 12%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--sapphire-semantic-color-feedback-warning) 30%, transparent);
+  font-size: var(--sapphire-semantic-size-font-sm);
+  color: var(--sapphire-semantic-color-foreground-secondary);
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.label {
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+  white-space: nowrap;
+}
+
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.input {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--sapphire-semantic-color-border-default);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  background: var(--sapphire-semantic-color-background-primary);
+  font-size: var(--sapphire-semantic-size-font-sm);
+  color: var(--sapphire-semantic-color-foreground-primary);
+  width: 11rem;
+}
+
+.select {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--sapphire-semantic-color-border-default);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  background: var(--sapphire-semantic-color-background-primary);
+  font-size: var(--sapphire-semantic-size-font-sm);
+  color: var(--sapphire-semantic-color-foreground-primary);
+}

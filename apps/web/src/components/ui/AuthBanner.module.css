@@ -1,0 +1,43 @@
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  padding: var(--sapphire-semantic-size-spacing-sm) var(--sapphire-semantic-size-spacing-md);
+  background: var(--sapphire-semantic-color-surface-secondary);
+  border-bottom: 1px solid var(--sapphire-semantic-color-border-primary);
+}
+
+.label {
+  font-size: var(--sapphire-semantic-size-font-sm);
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+  color: var(--sapphire-semantic-color-foreground-secondary);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.displayName {
+  font-size: var(--sapphire-semantic-size-font-sm);
+  font-weight: var(--sapphire-semantic-font-weight-medium);
+  color: var(--sapphire-semantic-color-foreground-primary);
+}
+
+.role {
+  font-size: var(--sapphire-semantic-size-font-xs);
+  padding: var(--sapphire-semantic-size-spacing-2xs) var(--sapphire-semantic-size-spacing-xs);
+  background: var(--sapphire-semantic-color-state-accent-subtle);
+  color: var(--sapphire-semantic-color-state-accent-default);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+  margin-left: auto;
+}

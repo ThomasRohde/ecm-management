@@ -1,0 +1,45 @@
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--sapphire-semantic-size-font-sm);
+}
+
+.th,
+.td {
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-sm);
+  text-align: left;
+  border-bottom: 1px solid var(--sapphire-semantic-color-border-subtle);
+}
+
+.th {
+  font-weight: var(--sapphire-semantic-font-weight-default-medium);
+  color: var(--sapphire-semantic-color-foreground-secondary);
+  text-transform: uppercase;
+  font-size: var(--sapphire-semantic-size-font-label-sm);
+}
+
+.tr:hover .td {
+  background: var(--sapphire-semantic-color-state-neutral-ghost-hover);
+}
+
+.actionsCell {
+  white-space: nowrap;
+  display: flex;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.emptyState {
+  padding: var(--sapphire-semantic-size-spacing-lg);
+  text-align: center;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}

@@ -1,0 +1,29 @@
+{
+  "dbInstanceIdentifier": "ecm-management-postgres",
+  "engine": "postgres",
+  "engineVersion": "16.6",
+  "dbInstanceClass": "db.t4g.medium",
+  "allocatedStorage": 100,
+  "maxAllocatedStorage": 200,
+  "storageType": "gp3",
+  "storageEncrypted": true,
+  "multiAZ": true,
+  "publiclyAccessible": false,
+  "backupRetentionPeriod": 7,
+  "deletionProtection": true,
+  "copyTagsToSnapshot": true,
+  "dbName": "ecm_management",
+  "masterUsername": "ecm_admin",
+  "manageMasterUserPassword": true,
+  "port": 5432,
+  "vpcSecurityGroupIds": ["sg-<database-access>"],
+  "dbSubnetGroupName": "ecm-private-db-subnets",
+  "parameterGroupFamily": "postgres16",
+  "performanceInsightsEnabled": true,
+  "monitoringInterval": 60,
+  "caCertificateIdentifier": "rds-ca-rsa2048-g1",
+  "tags": {
+    "Application": "ecm-management",
+    "Environment": "production"
+  }
+}

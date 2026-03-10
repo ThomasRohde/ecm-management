@@ -1,0 +1,128 @@
+.pageHeader {
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.pageAction {
+  flex-shrink: 0;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.searchPanel {
+  display: flex;
+  flex: 1 1 26rem;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.filterGrid {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  min-width: min(26rem, 100%);
+}
+
+.filterField {
+  min-width: 0;
+}
+
+.viewToggle {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+  width: min(100%, 34rem);
+}
+
+.viewToggleButton {
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.listCard {
+  text-decoration: none;
+  color: inherit;
+}
+
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.loadingTree {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.loadingTreeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.loadingTreeContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-3xs);
+}
+
+.loadingTreeMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}
+
+.loadingCards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.loadingCard {
+  padding: var(--sapphire-semantic-size-spacing-md);
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchPanel {
+    width: 100%;
+  }
+
+  .filterGrid {
+    width: 100%;
+  }
+
+  .pageAction {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .viewToggle {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .viewToggle {
+    grid-template-columns: 1fr;
+  }
+}

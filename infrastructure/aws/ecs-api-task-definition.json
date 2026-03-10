@@ -1,0 +1,64 @@
+{
+  "family": "ecm-management-api",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::<account-id>:role/ecm-ecs-execution",
+  "taskRoleArn": "arn:aws:iam::<account-id>:role/ecm-api-task",
+  "containerDefinitions": [
+    {
+      "name": "ecm-api",
+      "image": "<account-id>.dkr.ecr.<region>.amazonaws.com/ecm-api:<tag>",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "NODE_ENV", "value": "production" },
+        { "name": "API_PORT", "value": "3000" },
+        { "name": "CORS_ORIGIN", "value": "https://<frontend-domain>" },
+        { "name": "API_RATE_LIMIT_ENABLED", "value": "true" },
+        { "name": "API_RATE_LIMIT_TTL_SECONDS", "value": "60" },
+        { "name": "API_RATE_LIMIT_LIMIT", "value": "120" }
+      ],
+      "secrets": [
+        {
+          "name": "DATABASE_URL",
+          "valueFrom": "arn:aws:secretsmanager:<region>:<account-id>:secret:ecm/database-url"
+        },
+        {
+          "name": "JWT_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:<region>:<account-id>:secret:ecm/jwt-secret"
+        }
+      ],
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "node -e \"fetch('http://127.0.0.1:3000/api/v1/health/live').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))\""
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 20
+      },
+      "command": [
+        "sh",
+        "-c",
+        "pnpm prisma migrate deploy && node dist/main"
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/ecm-management-api",
+          "awslogs-region": "<region>",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

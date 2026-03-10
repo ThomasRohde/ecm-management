@@ -1,0 +1,119 @@
+.dialog {
+  position: fixed;
+  inset: 0;
+  max-width: 42rem;
+  width: calc(100% - 2rem);
+  margin: auto;
+  padding: 0;
+  border: none;
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  background: var(--sapphire-semantic-color-background-primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.dialogHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--sapphire-semantic-size-spacing-sm) var(--sapphire-semantic-size-spacing-md);
+  border-bottom: 1px solid var(--sapphire-semantic-color-border-subtle);
+}
+
+.dialogBody {
+  padding: var(--sapphire-semantic-size-spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.dialogFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  justify-content: flex-end;
+  padding: var(--sapphire-semantic-size-spacing-sm) var(--sapphire-semantic-size-spacing-md);
+  border-top: 1px solid var(--sapphire-semantic-color-border-subtle);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--sapphire-semantic-color-foreground-tertiary);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.25rem;
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+}
+
+.closeButton:hover {
+  color: var(--sapphire-semantic-color-foreground-primary);
+  background: var(--sapphire-semantic-color-state-neutral-ghost-hover);
+}
+
+.closeButton:focus-visible {
+  outline: var(--sapphire-semantic-size-focus-ring) solid var(--sapphire-global-color-blue-400);
+  outline-offset: 2px;
+}
+
+.warningBox {
+  background: var(--sapphire-semantic-color-background-negative-subtle);
+  border-left: 3px solid var(--sapphire-semantic-color-border-negative-default);
+  border-radius: 0 var(--sapphire-semantic-size-radius-sm) var(--sapphire-semantic-size-radius-sm) 0;
+  padding: var(--sapphire-semantic-size-spacing-sm);
+  font-size: var(--sapphire-semantic-size-font-sm);
+  line-height: 1.5;
+}
+
+/* ─── Diff preview section ───────────────────────────────────────────────── */
+
+.diffPreviewSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  border: 1px solid var(--sapphire-semantic-color-border-secondary);
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  overflow: hidden;
+}
+
+.diffToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  background: var(--sapphire-semantic-color-background-neutral-subtle);
+  border: none;
+  padding: var(--sapphire-semantic-size-spacing-xs) var(--sapphire-semantic-size-spacing-sm);
+  cursor: pointer;
+  font-size: var(--sapphire-semantic-size-font-sm);
+  color: var(--sapphire-semantic-color-foreground-accent);
+  width: 100%;
+  text-align: left;
+}
+
+.diffToggle:hover {
+  background: var(--sapphire-semantic-color-state-neutral-ghost-hover);
+}
+
+.diffToggle:focus-visible {
+  outline: var(--sapphire-semantic-size-focus-ring) solid var(--sapphire-global-color-blue-400);
+  outline-offset: -2px;
+}
+
+.diffList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  padding: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.diffEntry {
+  padding: var(--sapphire-semantic-size-spacing-xs);
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+  border: 1px solid var(--sapphire-semantic-color-border-subtle);
+}

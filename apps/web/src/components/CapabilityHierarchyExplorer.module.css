@@ -1,0 +1,120 @@
+/* CapabilityHierarchyExplorer — uses only Sapphire tokens */
+
+.explorer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-md);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+  justify-content: space-between;
+}
+
+.viewToggle {
+  display: flex;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+  flex-wrap: wrap;
+}
+
+.filterBox {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-3xs);
+}
+
+.filterInput {
+  width: 14rem;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  padding: var(--sapphire-semantic-size-spacing-3xs) 0;
+}
+
+.treeList {
+  list-style: none;
+  padding-left: var(--sapphire-semantic-size-spacing-md);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+/* Root-level tree list has no left indent */
+.treeList:first-child {
+  padding-left: 0;
+}
+
+.treeItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}
+
+.treeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.loadingList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.loadingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.loadingContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-3xs);
+}
+
+@media (max-width: 576px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .viewToggle {
+    width: 100%;
+  }
+
+  .viewToggle > * {
+    flex: 1 1 100%;
+  }
+
+  .filterBox {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filterInput {
+    width: 100%;
+  }
+
+  .listRow,
+  .treeRow {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}

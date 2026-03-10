@@ -1,0 +1,132 @@
+.page {
+  padding: var(--sapphire-semantic-size-spacing-xl);
+}
+
+.pageHeader {
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* ── Summary cards ─────────────────────────────────────────────────────────── */
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--sapphire-semantic-size-spacing-md);
+}
+
+.summaryCard {
+  min-width: 0;
+}
+
+.summaryValue {
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+/* ── Coverage bars ──────────────────────────────────────────────────────────── */
+
+.coverageBarTrack {
+  height: var(--sapphire-semantic-size-spacing-xs);
+  background: var(--sapphire-semantic-color-background-neutral-subtle);
+  border-radius: var(--sapphire-semantic-size-radius-xl);
+  overflow: hidden;
+}
+
+.coverageBarFill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width var(--sapphire-semantic-time-motion-slow) ease;
+}
+
+.coverageBarFill__positive {
+  background: var(--sapphire-semantic-color-background-positive);
+}
+
+.coverageBarFill__warning {
+  background: var(--sapphire-semantic-color-background-warning);
+}
+
+.coverageBarFill__negative {
+  background: var(--sapphire-semantic-color-background-negative);
+}
+
+/* ── Domain breakdown row ────────────────────────────────────────────────────── */
+
+.domainRow {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .domainRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.domainLabel {
+  padding-top: var(--sapphire-semantic-size-spacing-4xs);
+  word-break: break-word;
+}
+
+.domainBars {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Gap list ──────────────────────────────────────────────────────────────── */
+
+.gapList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.gapItem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+  padding: var(--sapphire-semantic-size-spacing-xs) 0;
+  border-bottom: var(--sapphire-semantic-size-border-sm) solid
+    var(--sapphire-semantic-color-border-secondary);
+}
+
+.gapItem:last-child {
+  border-bottom: none;
+}
+
+/* ── Activity list ──────────────────────────────────────────────────────────── */
+
+.activityList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.activityItem {
+  padding: var(--sapphire-semantic-size-spacing-sm) 0;
+  border-bottom: var(--sapphire-semantic-size-border-sm) solid
+    var(--sapphire-semantic-color-border-secondary);
+}
+
+.activityItem:last-child {
+  border-bottom: none;
+}
+
+/* ── Export actions ─────────────────────────────────────────────────────────── */
+
+.exportActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-md);
+}

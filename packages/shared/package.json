@@ -1,0 +1,23 @@
+{
+  "name": "@ecm/shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ECM Management Platform - Shared types and utilities",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint \"src/**/*.ts\"",
+    "test": "echo \"No tests yet\""
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

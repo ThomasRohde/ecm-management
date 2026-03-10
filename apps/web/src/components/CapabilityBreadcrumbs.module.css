@@ -1,0 +1,60 @@
+/* CapabilityBreadcrumbs — uses only Sapphire tokens */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-3xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--sapphire-semantic-size-spacing-3xs);
+}
+
+.separatorItem {
+  display: inline-flex;
+  align-items: center;
+}
+
+.separator {
+  color: var(--sapphire-semantic-color-foreground-secondary);
+  font-size: var(--sapphire-semantic-size-font-body-sm);
+  user-select: none;
+}
+
+.toggleButton,
+.collapseButton {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: var(--sapphire-semantic-color-foreground-accent);
+}
+
+.toggleButton:hover,
+.collapseButton:hover {
+  text-decoration: underline;
+}
+
+.toggleButton:focus-visible,
+.collapseButton:focus-visible {
+  outline: var(--sapphire-semantic-size-focus-ring) solid var(--sapphire-global-color-blue-400);
+  outline-offset: 2px;
+  border-radius: var(--sapphire-semantic-size-radius-sm);
+}
+
+.collapseButton {
+  align-self: flex-start;
+}

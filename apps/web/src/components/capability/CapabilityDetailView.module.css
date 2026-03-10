@@ -1,0 +1,42 @@
+.sectionHeader {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  justify-content: space-between;
+}
+
+.metadataGrid {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.narrativeGrid {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
+
+.badgeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}
+
+.link {
+  text-decoration: none;
+}
+
+.referenceList {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.sectionActions {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.textBlock {
+  margin: 0;
+}

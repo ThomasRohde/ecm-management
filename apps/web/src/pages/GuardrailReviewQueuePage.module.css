@@ -1,0 +1,72 @@
+.pageHeader {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  justify-content: space-between;
+}
+
+.summary {
+  min-width: 12rem;
+}
+
+.queueList {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-lg);
+}
+
+.cardHeader {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+  justify-content: space-between;
+}
+
+.cardBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}
+
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.titleLink:hover,
+.titleLink:focus-visible {
+  text-decoration: underline;
+}
+
+.warningMessage {
+  border-left: 4px solid var(--sapphire-semantic-color-foreground-warning);
+  padding-left: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.detailGrid {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-md);
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+}
+
+.terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-2xs);
+}
+
+.rationale {
+  background: var(--sapphire-semantic-color-background-secondary);
+  border-radius: var(--sapphire-semantic-size-radius-md);
+  padding: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sapphire-semantic-size-spacing-sm);
+}
+
+.loadingCards {
+  display: grid;
+  gap: var(--sapphire-semantic-size-spacing-lg);
+}

@@ -1,0 +1,49 @@
+.card {
+  border: var(--sapphire-semantic-size-border-sm) solid
+    var(--sapphire-semantic-color-border-secondary);
+}
+
+.neutral {
+  background: var(--sapphire-semantic-color-background-neutral-subtle);
+}
+
+.error {
+  background: var(--sapphire-semantic-color-background-negative-subtle);
+  border-color: var(--sapphire-semantic-color-border-negative-default);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sapphire-semantic-size-spacing-xs);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sapphire-semantic-size-icon-sm);
+  min-width: var(--sapphire-semantic-size-icon-sm);
+  height: var(--sapphire-semantic-size-icon-sm);
+  border-radius: var(--sapphire-semantic-size-radius-2xl);
+  font-size: var(--sapphire-semantic-size-font-body-sm);
+  font-weight: var(--sapphire-semantic-font-weight-default-bold);
+}
+
+.neutral .icon {
+  background: var(--sapphire-semantic-color-background-neutral-subtle);
+  color: var(--sapphire-semantic-color-foreground-secondary);
+}
+
+.error .icon {
+  background: var(--sapphire-semantic-color-background-negative-subtle);
+  color: var(--sapphire-semantic-color-foreground-negative);
+}
+
+.content {
+  min-width: 0;
+}
+
+.action {
+  margin-top: var(--sapphire-semantic-size-spacing-xs);
+}
